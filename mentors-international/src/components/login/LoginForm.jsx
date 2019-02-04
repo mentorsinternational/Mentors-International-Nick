@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const LoginForm = props => {
   return (
-    <form>
+    <form onSubmit={props.logIn}>
       <p>Username</p>
       <input
         name="username"
@@ -20,6 +21,7 @@ const LoginForm = props => {
         onChange={props.handleChange}
       />
       <button>Log in</button>
+      <Link to="/signup">Sign Up</Link>
     </form>
   );
 };

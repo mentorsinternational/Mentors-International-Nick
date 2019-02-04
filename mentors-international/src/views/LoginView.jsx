@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import { logIn } from "../store/actions";
 
 import LoginForm from "../components/login/LoginForm";
 
@@ -19,6 +22,11 @@ class LoginView extends Component {
     });
   };
 
+  logIn = e => {
+    e.preventDefault();
+    this.props.logIn(this.state.loginInfo);
+  };
+
   render() {
     return (
       <div>
@@ -26,10 +34,14 @@ class LoginView extends Component {
         <LoginForm
           loginInfo={this.state.loginInfo}
           handleChange={this.handleChange}
+          logIn={this.logIn}
         />
       </div>
     );
   }
 }
 
-export default LoginView;
+export default connect(
+  null,
+  { logIn }
+)(LoginView);

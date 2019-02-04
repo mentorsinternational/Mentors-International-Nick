@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const SignupForm = props => {
   return (
@@ -31,6 +32,7 @@ const SignupForm = props => {
       />
 
       <button>Sign Up</button>
+      <Link to="/login">Go to Login</Link>
     </form>
   );
 };
