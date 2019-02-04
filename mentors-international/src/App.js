@@ -1,11 +1,21 @@
 import React, { Component } from "react";
+import { Route } from "react-router-dom";
+
 import "./App.css";
+
+import HomeView from "./views/HomeView";
+import LoginView from "./views/LoginView";
+import MessageView from "./views/MessageView";
+import ScheduleView from "./views/ScheduleView";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>App</h1>
+        <Route exact path="/" component={HomeView} />
+        <Route path="/login" component={LoginView} />
+        <Route exact path="/message" component={MessageView} />
+        <Route exact path="/schedule" component={ScheduleView} />
       </div>
     );
   }
