@@ -1,33 +1,41 @@
+import {
+  SIGNUP_START,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILURE
+} from '../actions'
+
 const initialState = {
-  messages: [
-    {
-      message: 'Example message number one'
-    },
-    {
-      message: 'Example message number two'
-    },
-    {
-      message: 'Example message number three'
-    }
-  ],
-  schedules: [
-    {
-      schedule: 'Example schedule number one'
-    },
-    {
-      schedule: 'Example schedule number two'
-    },
-    {
-      schedule: 'Example schedule number three'
-    }
-  ]
+  messages: [],
+  schedules: [],
+  isSigningUp: false,
+  error: ''
 }
 
 const reducer = (state=initialState, action) => {
   switch(action.type) {
+    case SIGNUP_START:
+      return {
+        ...state,
+        isSigningUp: true,
+        error: ''
+      }
+
+    case SIGNUP_SUCCESS:
+      return {
+        ...state,
+        isSigningUp: false
+      }
+
+    case SIGNUP_FAILURE:
+      return {
+        ...state,
+        isSigningUp: false,
+        error: 'Error Signing Up'
+      }
+
     default:
       return {
-        ...state
+        ...state,
       }
   }
 }

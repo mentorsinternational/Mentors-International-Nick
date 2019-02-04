@@ -2,7 +2,7 @@ import React from "react";
 
 const SignupForm = props => {
   return (
-    <form>
+    <form onSubmit={props.signUp}>
       <p>Name</p>
       <input
         name="name"

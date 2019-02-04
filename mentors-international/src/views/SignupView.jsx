@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import { signUp } from "../store/actions";
+
 import SignupForm from "../components/signup/SignupForm";
 
 class SignupView extends Component {
@@ -21,12 +23,18 @@ class SignupView extends Component {
     });
   };
 
+  signUp = e => {
+    e.preventDefault();
+    this.props.signUp(this.state.newUser);
+  };
+
   render() {
     return (
       <div>
         <SignupForm
           newUser={this.state.newUser}
           handleChange={this.handleChange}
+          signUp={this.signUp}
         />
       </div>
     );
@@ -35,5 +43,5 @@ class SignupView extends Component {
 
 export default connect(
   null,
-  {}
+  { signUp }
 )(SignupView);
