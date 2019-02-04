@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import LoginForm from "../components/login/LoginForm";
+import SignupForm from "../components/signup/SignupForm";
 
-class LoginView extends Component {
+class SignupView extends Component {
   state = {
-    loginInfo: {
+    newUser: {
+      name: "",
       username: "",
       password: ""
     }
@@ -12,8 +14,8 @@ class LoginView extends Component {
 
   handleChange = e => {
     this.setState({
-      loginInfo: {
-        ...this.state.loginInfo,
+      newUser: {
+        ...this.state.newUser,
         [e.target.name]: e.target.value
       }
     });
@@ -22,9 +24,8 @@ class LoginView extends Component {
   render() {
     return (
       <div>
-        <h1>Login View</h1>
-        <LoginForm
-          loginInfo={this.state.loginInfo}
+        <SignupForm
+          newUser={this.state.newUser}
           handleChange={this.handleChange}
         />
       </div>
@@ -32,4 +33,7 @@ class LoginView extends Component {
   }
 }
 
-export default LoginView;
+export default connect(
+  null,
+  {}
+)(SignupView);

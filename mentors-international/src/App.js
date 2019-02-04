@@ -6,6 +6,7 @@ import HomeView from "./views/HomeView";
 import LoginView from "./views/LoginView";
 import MessageView from "./views/MessageView";
 import ScheduleView from "./views/ScheduleView";
+import SignupView from "./views/SignupView";
 import NavBar from "./components/nav/NavBar";
 
 const AppWrapper = styled.div`
@@ -19,6 +20,7 @@ class App extends Component {
         <NavBar />
         <Route exact path="/" component={HomeView} />
         <Route path="/login" component={LoginView} />
+        <Route path="/signup" component={SignupView} />
         <Route exact path="/message" component={MessageView} />
         <Route exact path="/schedule" component={ScheduleView} />
       </AppWrapper>

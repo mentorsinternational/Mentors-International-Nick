@@ -1,11 +1,13 @@
 import React from "react";
 
+import Message from "./Message";
+
 const MessageList = props => {
   return (
     <div>
       <h1>Recent Messages</h1>
       {props.messages.map((message, index) => (
-        <h3 key={index}>{message.message}</h3>
+        <Message key={index} message={message} />
       ))}
     </div>
   );
