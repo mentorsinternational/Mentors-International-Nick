@@ -6,7 +6,8 @@ class LoginView extends Component {
   state = {
     loginInfo: {
       username: "",
-      password: ""
+      password: "",
+      phone: ""
     }
   };
 

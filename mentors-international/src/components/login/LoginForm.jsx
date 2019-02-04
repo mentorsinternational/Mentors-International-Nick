@@ -19,6 +19,16 @@ const LoginForm = props => {
         value={props.loginInfo.password}
         onChange={props.handleChange}
       />
+
+      <p>Phone Number</p>
+      <input
+        name="phone"
+        type="text"
+        placeholder="Phone Number"
+        value={props.loginInfo.phone}
+        onChange={props.handleChange}
+      />
+      <button>Log in</button>
     </form>
   );
 };
