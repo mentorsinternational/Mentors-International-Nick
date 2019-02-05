@@ -7,8 +7,8 @@ import { createMessage } from "../store/actions";
 class MessageView extends Component {
   state = {
     newMessage: {
-      messageTitle: "",
-      messageContent: ""
+      message_title: "",
+      message_content: ""
     }
   };
 

@@ -42,16 +42,16 @@ const MessageForm = props => {
       <InputTitles>Message Title</InputTitles>
       <MessageInput
         type="text"
-        name="messageTitle"
-        value={props.newMessage.title}
+        name="message_title"
+        value={props.newMessage.message_title}
         onChange={props.handleChange}
       />
       <InputTitles>Message Content</InputTitles>
       <MessageContent
-        name="messageContent"
+        name="message_content"
         cols="30"
         rows="10"
-        value={props.newMessage.messageContent}
+        value={props.newMessage.message_content}
         onChange={props.handleChange}
       />
       <CreateMessageButton>Create Message</CreateMessageButton>
