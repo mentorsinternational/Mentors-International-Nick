@@ -4,6 +4,8 @@ import DatePicker from "react-datepicker";
 import ScheduleMessageListPopUp from "./ScheduleMessageListPopUp";
 import ScheduleAddedMessages from "./ScheduleAddedMessages";
 
+import "react-datepicker/dist/react-datepicker.css";
+
 const ScheduleForm = props => {
   return (
     <form>
