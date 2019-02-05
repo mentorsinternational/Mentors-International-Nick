@@ -2,17 +2,24 @@ import React, { Component } from "react";
 
 import ScheduleForm from "../components/Schedule/ScheduleForm";
 import moment from "moment";
-import { th } from "date-fns/esm/locale";
 
 console.log(moment().format("dddd"));
 class ScheduleView extends Component {
   state = {
-    startDate: new Date()
+    startDate: new Date(),
+    justOnce: true
   };
 
   handleDateChange = date => {
     this.setState({
       startDate: date
+    });
+  };
+
+  toggle = e => {
+    e.preventDefault();
+    this.setState({
+      justOnce: !this.state.justOnce
     });
   };
 
@@ -23,6 +30,8 @@ class ScheduleView extends Component {
         <ScheduleForm
           startDate={this.state.startDate}
           handleDateChange={this.handleDateChange}
+          justOnce={this.state.justOnce}
+          toggle={this.toggle}
         />
       </div>
     );
