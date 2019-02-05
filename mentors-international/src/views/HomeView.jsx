@@ -27,6 +27,8 @@ class HomeView extends Component {
         <Link to="/message">
           <AddMessageBtn>+ Message</AddMessageBtn>
         </Link>
+        <Link to="/login">Login</Link>
+        <Link to="/signup">Signup</Link>
       </div>
     );
   }
