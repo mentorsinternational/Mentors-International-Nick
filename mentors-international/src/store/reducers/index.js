@@ -9,7 +9,24 @@ import {
 } from '../actions'
 
 const initialState = {
-  messages: [],
+  messages: [
+    {
+      messageTitle: 'Test Message 1',
+      messageContent: 'This is just a test...'
+    },
+    {
+      messageTitle: 'Test Message 2',
+      messageContent: 'This is just a test...'
+    },
+    {
+      messageTitle: 'Test Message 3',
+      messageContent: 'This is just a test...'
+    },
+    {
+      messageTitle: 'Test Message 4',
+      messageContent: 'This is just a test...'
+    }
+  ],
   schedules: [],
   isSigningUp: false,
   error: ''

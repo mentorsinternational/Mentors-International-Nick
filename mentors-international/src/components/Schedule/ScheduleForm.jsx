@@ -1,6 +1,9 @@
 import React from "react";
 import DatePicker from "react-datepicker";
 
+import ScheduleMessageListPopUp from "./ScheduleMessageListPopUp";
+import ScheduleAddedMessages from "./ScheduleAddedMessages";
+
 const ScheduleForm = props => {
   return (
     <form>
@@ -20,6 +23,16 @@ const ScheduleForm = props => {
       <button onClick={props.toggle}>
         {props.justOnce ? "Just Once" : "Every Week"}
       </button>
+      <h3>Add Messages to Remider</h3>
+      <ScheduleAddedMessages
+        removeMessage={props.removeMessage}
+        addedMessages={props.addedMessages}
+      />
+      <ScheduleMessageListPopUp
+        messages={props.messages}
+        toggleML={props.toggleML}
+        addMessage={props.addMessage}
+      />
     </form>
   );
 };
