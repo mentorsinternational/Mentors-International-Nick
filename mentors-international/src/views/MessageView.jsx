@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import MessageForm from "../components/message/MessageForm";
+import { connect } from "react-redux";
+
+import { createMessage } from "../store/actions";
 
 class MessageView extends Component {
   state = {
@@ -18,6 +21,11 @@ class MessageView extends Component {
     });
   };
 
+  createMessage = e => {
+    e.preventDefault();
+    this.props.createMessage(this.state.newMessage);
+  };
+
   render() {
     return (
       <div>
@@ -25,10 +33,14 @@ class MessageView extends Component {
         <MessageForm
           newMessage={this.state.newMessage}
           handleChange={this.handleChange}
+          createMessage={this.createMessage}
         />
       </div>
     );
   }
 }
 
-export default MessageView;
+export default connect(
+  null,
+  { createMessage }
+)(MessageView);

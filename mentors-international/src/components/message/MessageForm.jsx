@@ -38,7 +38,7 @@ const CreateMessageButton = styled.button`
 
 const MessageForm = props => {
   return (
-    <MessageFormWrapper>
+    <MessageFormWrapper onSubmit={props.createMessage}>
       <InputTitles>Message Title</InputTitles>
       <MessageInput
         type="text"

@@ -1,7 +1,11 @@
 import {
   SIGNUP_START,
   SIGNUP_SUCCESS,
-  SIGNUP_FAILURE
+  SIGNUP_FAILURE,
+  LOGIN_START,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  CREATE_MESSAGE
 } from '../actions'
 
 const initialState = {
@@ -31,6 +35,15 @@ const reducer = (state=initialState, action) => {
         ...state,
         isSigningUp: false,
         error: 'Error Signing Up'
+      }
+
+    case CREATE_MESSAGE:
+      return {
+        ...state,
+        messages: [
+          ...state.messages,
+          action.payload
+        ]
       }
 
     default:
