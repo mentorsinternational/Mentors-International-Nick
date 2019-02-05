@@ -11,7 +11,7 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const signUp = newUser => dispatch => {
   dispatch({type: SIGNUP_START});
 
-  axios.post('http://localhost:4600/signup', newUser)
+  axios.post('https://lambda-mentors-international.herokuapp.com/signup', newUser)
     .then(res => dispatch({type: SIGNUP_SUCCESS}))
     .catch(err => dispatch({type: SIGNUP_FAILURE}));
 }
@@ -19,7 +19,7 @@ export const signUp = newUser => dispatch => {
 export const logIn = user => dispatch => {
   console.log(user)
   dispatch({type: LOGIN_START});
-  axios.post('http://localhost:4600/login', user)
-    .then(res => console.log(res))
+  axios.post('https://lambda-mentors-international.herokuapp.com/login', user)
+    .then(res => localStorage.setItem('jwt', res.data.token))
     .catch(err => console.log(err));
 }

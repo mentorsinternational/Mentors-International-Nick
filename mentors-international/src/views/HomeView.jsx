@@ -1,9 +1,21 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import styled from "styled-components";
 
 import MessageList from "../components/home/MessageList";
 import ScheduleList from "../components/home/ScheduleList";
+
+const AddMessageBtn = styled.button`
+  background: none;
+  border: none;
+  color: white;
+  padding: 15px 45px;
+  background: #62cdff;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+`;
 
 class HomeView extends Component {
   render() {
@@ -13,7 +25,7 @@ class HomeView extends Component {
         <MessageList messages={this.props.messages} />
         <ScheduleList schedules={this.props.schedules} />
         <Link to="/message">
-          <button>+ Message</button>
+          <AddMessageBtn>+ Message</AddMessageBtn>
         </Link>
       </div>
     );
