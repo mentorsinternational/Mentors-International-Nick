@@ -14,7 +14,19 @@ export const CREATE_MESSAGE_START = 'CREATE_MESSAGE_START';
 export const CREATE_MESSAGE_SUCCESS = 'CREATE_MESSAGE_SUCCESS';
 export const CREATE_MESSAGE_FAILURE = 'CREATE_MESSAGE_FAILURE';
 
+export const FETCH_MESSAGES_START = 'FETCH_MESSAGES_START';
+export const FETCH_MESSAGES_SUCCESS = 'FETCH_MESSAGES_SUCCESS';
+export const FETCH_MESSAGES_FAILURE = 'FETCH_MESSAGES_FAILURE';
+
 const baseURL = 'http://localhost:4600';
+
+const setHeaders = _ => {
+  return {
+    headers: {
+      authorization: localStorage.getItem("jwt")
+    }
+  }
+}
 
 export const signUp = newUser => dispatch => {
   dispatch({type: SIGNUP_START});
@@ -28,14 +40,24 @@ export const logIn = user => dispatch => {
   console.log(user)
   dispatch({type: LOGIN_START});
   axios.post(`${baseURL}/login`, user)
-    .then(res => localStorage.setItem('jwt', res.data.token))
+    .then(res => {
+      console.log(res);
+      localStorage.setItem('jwt', res.data.token)
+    })
     .catch(err => console.log(err));
 }
 
 export const createMessage = message => dispatch => {
   dispatch({type: CREATE_MESSAGE_START})
 
-  axios.post(`${baseURL}/messages`, message)
+  axios.post(`${baseURL}/messages`, message, setHeaders())
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+}
+
+export const fetchMessages = id => dispatch => {
+  dispatch({type: FETCH_MESSAGES_START})
+  axios.get(`${baseURL}/messages`, setHeaders())
     .then(res => console.log(res))
     .catch(err => console.log(err));
 }

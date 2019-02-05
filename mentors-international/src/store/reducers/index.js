@@ -11,20 +11,20 @@ import {
 const initialState = {
   messages: [
     {
-      messageTitle: 'Test Message 1',
-      messageContent: 'This is just a test...'
+      message_title: 'Test Message 1',
+      message_content: 'This is just a test...'
     },
     {
-      messageTitle: 'Test Message 2',
-      messageContent: 'This is just a test...'
+      message_title: 'Test Message 2',
+      message_content: 'This is just a test...'
     },
     {
-      messageTitle: 'Test Message 3',
-      messageContent: 'This is just a test...'
+      message_title: 'Test Message 3',
+      message_content: 'This is just a test...'
     },
     {
-      messageTitle: 'Test Message 4',
-      messageContent: 'This is just a test...'
+      message_title: 'Test Message 4',
+      message_content: 'This is just a test...'
     }
   ],
   schedules: [],

@@ -22,7 +22,7 @@ const ScheduleMessageList = props => {
       <h3>Add a Message</h3>
       {props.messages.map((message, index) => (
         <MessageTitles onClick={e => props.addMessage(e, message)} key={index}>
-          {message.messageTitle}
+          {message.message_title}
         </MessageTitles>
       ))}
     </PopUpMessList>

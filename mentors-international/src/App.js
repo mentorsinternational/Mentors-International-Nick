@@ -14,14 +14,7 @@ const AppWrapper = styled.div`
 `;
 
 class App extends Component {
-  componentDidMount() {
-    const token = localStorage.getItem("jwt");
-    const requestOptions = {
-      headers: {
-        authorization: token
-      }
-    };
-  }
+
 
   render() {
     return (

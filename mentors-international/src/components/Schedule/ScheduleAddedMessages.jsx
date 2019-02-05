@@ -14,7 +14,7 @@ const ScheduleAddedMessages = props => {
     <div>
       {props.addedMessages.map((message, index) => (
         <AddedMessages key={index} onClick={e => props.removeMessage(e, index)}>
-          {message.messageTitle}
+          {message.message_title}
         </AddedMessages>
       ))}
     </div>

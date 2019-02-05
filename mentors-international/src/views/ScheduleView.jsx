@@ -10,7 +10,8 @@ class ScheduleView extends Component {
     startDate: new Date(),
     justOnce: true,
     toggleML: false,
-    addedMessages: []
+    addedMessages: [],
+    scheduleTitle: ""
   };
 
   handleDateChange = date => {
