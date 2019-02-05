@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 import ScheduleForm from "../components/Schedule/ScheduleForm";
 import moment from "moment";
 
-console.log(moment().format("dddd"));
+// console.log(moment().format("dddd"));
 class ScheduleView extends Component {
   state = {
     startDate: new Date(),
     justOnce: true,
-    toggleML: true,
+    toggleML: false,
     addedMessages: []
   };
 
@@ -26,10 +26,18 @@ class ScheduleView extends Component {
     });
   };
 
+  toggleMessageList = e => {
+    e.preventDefault();
+    this.setState({
+      toggleML: !this.state.toggleML
+    });
+  };
+
   addMessage = (e, message) => {
     e.preventDefault();
     this.setState({
-      addedMessages: [...this.state.addedMessages, message]
+      addedMessages: [...this.state.addedMessages, message],
+      toggleML: false
     });
   };
 
@@ -56,6 +64,7 @@ class ScheduleView extends Component {
           addedMessages={this.state.addedMessages}
           addMessage={this.addMessage}
           removeMessage={this.removeMessage}
+          toggleMessageList={this.toggleMessageList}
         />
       </div>
     );
