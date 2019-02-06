@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import HomeView from "./views/HomeView";
 import LoginView from "./views/LoginView";
-import MessageView from "./views/MessageView";
+import ReminderView from "./views/ReminderView";
 import ScheduleView from "./views/ScheduleView";
 import SignupView from "./views/SignupView";
 import NavBar from "./components/nav/NavBar";
@@ -35,10 +35,10 @@ class App extends Component {
         <Route path="/signup" component={SignupView} />
         <Route
           exact
-          path="/message"
+          path="/reminder"
           render={props =>
             localStorage.getItem("jwt") ? (
-              <MessageViewWithRouter />
+              <ReminderViewWithRouter />
             ) : (
               <Redirect to="/login" />
             )
@@ -60,6 +60,6 @@ class App extends Component {
   }
 }
 
-const MessageViewWithRouter = withRouter(MessageView);
+const ReminderViewWithRouter = withRouter(ReminderView);
 
 export default App;
