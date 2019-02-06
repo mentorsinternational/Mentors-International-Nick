@@ -12,9 +12,27 @@ const MenteeTitles = styled.h3`
   text-align: left;
 `;
 
+const MenteeFormWrapper = styled.form`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+`;
+
+const MenteeFormBtn = styled.button`
+  background: none;
+  border: none;
+  color: white;
+  padding: 15px 45px;
+  background: #62cdff;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+`;
+
 const MenteeForm = props => {
   return (
-    <form onSubmit={props.createMentee}>
+    <MenteeFormWrapper onSubmit={props.createMentee}>
       <MenteeTitles>Mentee Name</MenteeTitles>
       <MenteeInput
         type="text"
@@ -31,8 +49,8 @@ const MenteeForm = props => {
         value={props.new_mentee.phone_number}
         onChange={props.handleChange}
       />
-      <button>Add Mentee</button>
-    </form>
+      <MenteeFormBtn>Add Mentee</MenteeFormBtn>
+    </MenteeFormWrapper>
   );
 };
 
