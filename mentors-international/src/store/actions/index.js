@@ -58,7 +58,7 @@ export const createMessage = message => dispatch => {
 export const fetchMessages = id => dispatch => {
   dispatch({type: FETCH_MESSAGES_START})
   axios.get(`${baseURL}/messages`, setHeaders())
-    .then(res => console.log(res))
+    .then(res => dispatch({type: FETCH_MESSAGES_SUCCESS, payload: res.data}))
     .catch(err => console.log(err));
 }
 

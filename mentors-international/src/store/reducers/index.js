@@ -5,28 +5,14 @@ import {
   LOGIN_START,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  CREATE_MESSAGE
+  CREATE_MESSAGE,
+  FETCH_MESSAGES_START,
+  FETCH_MESSAGES_SUCCESS,
+  FETCH_MESSAGES_FAILURE
 } from '../actions'
 
 const initialState = {
-  messages: [
-    {
-      message_title: 'Test Message 1',
-      message_content: 'This is just a test...'
-    },
-    {
-      message_title: 'Test Message 2',
-      message_content: 'This is just a test...'
-    },
-    {
-      message_title: 'Test Message 3',
-      message_content: 'This is just a test...'
-    },
-    {
-      message_title: 'Test Message 4',
-      message_content: 'This is just a test...'
-    }
-  ],
+  messages: [],
   schedules: [],
   isSigningUp: false,
   error: ''
@@ -53,6 +39,13 @@ const reducer = (state=initialState, action) => {
         isSigningUp: false,
         error: 'Error Signing Up'
       }
+
+    case FETCH_MESSAGES_SUCCESS: {
+      return {
+        ...state,
+        messages: action.payload
+      }
+    }
 
     case CREATE_MESSAGE:
       return {
