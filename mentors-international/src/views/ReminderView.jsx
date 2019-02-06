@@ -96,6 +96,27 @@ class MessageView extends Component {
     });
   };
 
+  toggleDateReminder = (e, otherIndex) => {
+    e.preventDefault();
+    this.setState({
+      newMessage: {
+        ...this.state.newMessage,
+        reminder_dates: this.state.newMessage.reminder_dates.map(
+          (date, index) => {
+            if (index === otherIndex) {
+              return {
+                ...date,
+                every_week: !date.every_week
+              };
+            } else {
+              return date;
+            }
+          }
+        )
+      }
+    });
+  };
+
   render() {
     return (
       <ReminderWrapper>
@@ -111,6 +132,7 @@ class MessageView extends Component {
           reminder_dates={this.state.newMessage.reminder_dates}
           addDate={this.addDate}
           removeDate={this.removeDate}
+          toggleDateReminder={this.toggleDateReminder}
         />
         <CreateMessageButton>Create Message</CreateMessageButton>
       </ReminderWrapper>

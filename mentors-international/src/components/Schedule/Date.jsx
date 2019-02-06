@@ -24,11 +24,13 @@ const RemindDiv = styled.div`
 
 const Date = props => {
   return (
-    <DateWrapper onClick={e => props.removeDate(e, props.index)}>
-      <h4>{props.date.date}</h4>
+    <DateWrapper>
+      <h4 onClick={e => props.removeDate(e, props.index)}>{props.date.date}</h4>
       <RemindDiv>
         <p>Remind me</p>
-        <button>Toggle</button>
+        <button onClick={e => props.toggleDateReminder(e, props.index)}>
+          {props.date.every_week ? "Every Week" : "Just Once"}
+        </button>
       </RemindDiv>
     </DateWrapper>
   );

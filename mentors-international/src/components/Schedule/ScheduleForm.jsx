@@ -58,7 +58,6 @@ const AddDateBtn = styled.button`
 `;
 
 const ScheduleForm = props => {
-  props.reminder_dates.map(date => console.log(Object.keys(date.date)));
   return (
     <ScheduleFormWrapper>
       <FlexWrapper>
@@ -67,6 +66,7 @@ const ScheduleForm = props => {
           <DateList
             reminder_dates={props.reminder_dates}
             removeDate={props.removeDate}
+            toggleDateReminder={props.toggleDateReminder}
           />
           <div>
             <StyledDatePicker
@@ -92,8 +92,5 @@ const ScheduleForm = props => {
 export default ScheduleForm;
 
 {
-  /* <h3>Remind me</h3>
-<button onClick={props.toggle}>
-  {props.justOnce ? "Just Once" : "Every Week"}
-</button> */
+  /*  */
 }

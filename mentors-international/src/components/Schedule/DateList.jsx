@@ -8,11 +8,11 @@ const DateList = props => {
     <div>
       {props.reminder_dates.map((date, index) => (
         <Date
-          on
           date={date}
           key={index}
           index={index}
           removeDate={props.removeDate}
+          toggleDateReminder={props.toggleDateReminder}
         />
       ))}
     </div>
