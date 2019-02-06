@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import styled from "styled-components";
 
 const NavBarWrapper = styled.nav`
@@ -21,18 +21,33 @@ const NavLinks = styled(NavLink)`
   }
 `;
 
+const LogoutBtn = styled(Link)`
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+`;
+
 const NavBar = props => {
+  const logOut = _ => {
+    localStorage.removeItem("jwt");
+  };
+
   return (
     <NavBarWrapper>
       <NavLinks exact to="/">
         Home
       </NavLinks>
       <NavLinks exact to="/message">
-        Create Message
+        Create Reminder
       </NavLinks>
       <NavLinks exact to="/schedule">
         Create Schedule
       </NavLinks>
+      {localStorage.getItem("jwt") && (
+        <LogoutBtn to="/login" onClick={logOut}>
+          Log Out
+        </LogoutBtn>
+      )}
     </NavBarWrapper>
   );
 };

@@ -30,7 +30,7 @@ class MessageView extends Component {
   render() {
     return (
       <div>
-        <h1>Message View</h1>
+        <h1>Create Reminder</h1>
         <MessageForm
           newMessage={this.state.newMessage}
           handleChange={this.handleChange}

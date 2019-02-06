@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Redirect } from 'react-router-dom'
 
 export const SIGNUP_START = 'SIGNUP_START';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';

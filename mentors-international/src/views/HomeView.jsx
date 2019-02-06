@@ -27,14 +27,11 @@ class HomeView extends Component {
   render() {
     return (
       <div>
-        <h1>Home View</h1>
         <MessageList messages={this.props.messages} />
         <ScheduleList schedules={this.props.schedules} />
         <Link to="/message">
           <AddMessageBtn>+ Message</AddMessageBtn>
         </Link>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Signup</Link>
       </div>
     );
   }
