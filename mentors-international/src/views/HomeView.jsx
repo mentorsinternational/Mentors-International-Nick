@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import Loader from "react-loader-spinner";
 
 import { fetchMessages, fetchMentees } from "../store/actions";
 
@@ -28,8 +29,14 @@ class HomeView extends Component {
   render() {
     return (
       <div>
-        <ReminderList messages={this.props.messages} />
-        <MenteeList mentees={this.props.mentees} />
+        {!this.props.isFetchingMessages && !this.props.isFetchingMentees ? (
+          <>
+            <ReminderList messages={this.props.messages} />
+            <MenteeList mentees={this.props.mentees} />
+          </>
+        ) : (
+          <Loader type="TailSpin" color="#62cdff" height="100" width="100" />
+        )}
         <Link to="/message">
           <AddMessageBtn>Create Reminder</AddMessageBtn>
         </Link>
@@ -42,7 +49,9 @@ const mapStateToProps = state => {
   return {
     messages: state.messages,
     schedules: state.schedules,
-    mentees: state.mentees
+    mentees: state.mentees,
+    isFetchingMessages: state.isFetchingMessages,
+    isFetchingMentees: state.isFetchingMentees
   };
 };
 

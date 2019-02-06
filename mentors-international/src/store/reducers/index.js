@@ -79,7 +79,8 @@ const reducer = (state=initialState, action) => {
     case FETCH_MENTEES_SUCCESS:
       return {
         ...state,
-        mentees: action.payload
+        mentees: action.payload,
+        isFetchingMentees: false
       }
 
     default:
