@@ -7,8 +7,8 @@ import { createMessage } from "../store/actions";
 class MessageView extends Component {
   state = {
     newMessage: {
-      messageTitle: "",
-      messageContent: ""
+      message_title: "",
+      message_content: ""
     }
   };
 
@@ -24,6 +24,7 @@ class MessageView extends Component {
   createMessage = e => {
     e.preventDefault();
     this.props.createMessage(this.state.newMessage);
+    this.props.history.push("/");
   };
 
   render() {

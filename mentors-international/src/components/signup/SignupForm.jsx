@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const SignupForm = props => {
   return (
     <form onSubmit={props.signUp}>
+      <h1>Sign Up</h1>
       <p>Name</p>
       <input
         name="name"

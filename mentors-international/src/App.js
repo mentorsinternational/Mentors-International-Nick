@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect, withRouter } from "react-router-dom";
 import styled from "styled-components";
 
 import HomeView from "./views/HomeView";
@@ -14,18 +14,52 @@ const AppWrapper = styled.div`
 `;
 
 class App extends Component {
+
+
   render() {
     return (
       <AppWrapper>
         <NavBar />
-        <Route exact path="/" component={HomeView} />
+        <Route
+          exact
+          path="/"
+          render={props =>
+            localStorage.getItem("jwt") ? (
+              <HomeView />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
+        />
         <Route path="/login" component={LoginView} />
         <Route path="/signup" component={SignupView} />
-        <Route exact path="/message" component={MessageView} />
-        <Route exact path="/schedule" component={ScheduleView} />
+        <Route
+          exact
+          path="/message"
+          render={props =>
+            localStorage.getItem("jwt") ? (
+              <MessageViewWithRouter />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
+        />
+        <Route
+          exact
+          path="/schedule"
+          render={props =>
+            localStorage.getItem("jwt") ? (
+              <ScheduleView />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
+        />
       </AppWrapper>
     );
   }
 }
+
+const MessageViewWithRouter = withRouter(MessageView);
 
 export default App;
