@@ -7,6 +7,7 @@ import LoginView from "./views/LoginView";
 import ReminderView from "./views/ReminderView";
 import ScheduleView from "./views/ScheduleView";
 import SignupView from "./views/SignupView";
+import MenteeView from './views/MenteeView';
 import NavBar from "./components/nav/NavBar";
 
 const AppWrapper = styled.div`
@@ -50,6 +51,17 @@ class App extends Component {
           render={props =>
             localStorage.getItem("jwt") ? (
               <ScheduleView />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
+        />
+        <Route
+          exact
+          path="/mentee"
+          render={props =>
+            localStorage.getItem("jwt") ? (
+              <MenteeView />
             ) : (
               <Redirect to="/login" />
             )

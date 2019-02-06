@@ -5,8 +5,8 @@ import styled from "styled-components";
 
 import { fetchMessages } from "../store/actions";
 
-import MessageList from "../components/home/MessageList";
-import ScheduleList from "../components/home/ScheduleList";
+import ReminderList from "../components/home/ReminderList";
+import MenteeList from "../components/home/MenteeList";
 
 const AddMessageBtn = styled.button`
   background: none;
@@ -27,10 +27,10 @@ class HomeView extends Component {
   render() {
     return (
       <div>
-        <MessageList messages={this.props.messages} />
-        <ScheduleList schedules={this.props.schedules} />
+        <ReminderList messages={this.props.messages} />
+        <MenteeList schedules={this.props.schedules} />
         <Link to="/message">
-          <AddMessageBtn>+ Message</AddMessageBtn>
+          <AddMessageBtn>Create Reminder</AddMessageBtn>
         </Link>
       </div>
     );

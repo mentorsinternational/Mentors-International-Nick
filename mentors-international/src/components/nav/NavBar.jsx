@@ -40,6 +40,9 @@ const NavBar = props => {
       <NavLinks exact to="/reminder">
         Create Reminder
       </NavLinks>
+      <NavLinks exact to="/mentee">
+        Add Mentee
+      </NavLinks>
       {localStorage.getItem("jwt") && (
         <LogoutBtn to="/login" onClick={logOut}>
           Log Out
