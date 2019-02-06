@@ -24,6 +24,7 @@ class MessageView extends Component {
   createMessage = e => {
     e.preventDefault();
     this.props.createMessage(this.state.newMessage);
+    this.props.history.push("/");
   };
 
   render() {

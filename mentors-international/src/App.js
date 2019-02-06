@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, withRouter } from "react-router-dom";
 import styled from "styled-components";
 
 import HomeView from "./views/HomeView";
@@ -38,7 +38,7 @@ class App extends Component {
           path="/message"
           render={props =>
             localStorage.getItem("jwt") ? (
-              <MessageView />
+              <MessageViewWithRouter />
             ) : (
               <Redirect to="/login" />
             )
@@ -60,8 +60,6 @@ class App extends Component {
   }
 }
 
-export default App;
+const MessageViewWithRouter = withRouter(MessageView);
 
-{
-  /* <Route exact path="/" component={HomeView} /> */
-}
+export default App;
