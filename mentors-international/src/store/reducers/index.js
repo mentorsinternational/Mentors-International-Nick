@@ -11,7 +11,11 @@ import {
   FETCH_MESSAGES_FAILURE,
   FETCH_MENTEES_START,
   FETCH_MENTEES_SUCCESS,
-  FETCH_MENTEES_FAILURE
+  FETCH_MENTEES_FAILURE,
+  DELETE_MENTEE_START,
+  DELETE_MENTEE_SUCCESS,
+  DELETE_MENTEE_FAILURE,
+  deleteMentee
 } from '../actions'
 
 const initialState = {
@@ -21,6 +25,7 @@ const initialState = {
   isSigningUp: false,
   isFetchingMessages: false,
   isFetchingMentees: false,
+  isDeletingMentee: false,
   error: ''
 }
 
@@ -81,6 +86,18 @@ const reducer = (state=initialState, action) => {
         ...state,
         mentees: action.payload,
         isFetchingMentees: false
+      }
+
+    case DELETE_MENTEE_START:
+      return {
+        ...state,
+        isDeletingMentee: true
+      }
+
+    case DELETE_MENTEE_SUCCESS:
+      return{
+        ...state,
+        isDeletingMentee: false
       }
 
     default:

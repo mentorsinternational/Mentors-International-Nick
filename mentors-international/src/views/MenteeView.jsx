@@ -25,6 +25,7 @@ class MenteeView extends Component {
   createMentee = e => {
     e.preventDefault();
     this.props.createMentee(this.state.new_mentee);
+    this.props.history.push("/");
   };
 
   render() {

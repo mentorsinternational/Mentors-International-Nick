@@ -61,7 +61,7 @@ class App extends Component {
           path="/mentees"
           render={props =>
             localStorage.getItem("jwt") ? (
-              <MenteeView />
+              <MenteeViewWithRouter />
             ) : (
               <Redirect to="/login" />
             )
@@ -73,5 +73,6 @@ class App extends Component {
 }
 
 const ReminderViewWithRouter = withRouter(ReminderView);
+const MenteeViewWithRouter = withRouter(MenteeView);
 
 export default App;

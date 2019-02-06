@@ -7,7 +7,11 @@ const MenteeList = props => {
     <div>
       <h1>Mentees</h1>
       {props.mentees.map(mentee => (
-        <Mentee key={mentee.id} mentee={mentee} />
+        <Mentee
+          key={mentee.id}
+          mentee={mentee}
+          deleteMentee={props.deleteMentee}
+        />
       ))}
     </div>
   );

@@ -18,9 +18,17 @@ export const CREATE_MENTEE_START = 'CREATE_MENTEE_START';
 export const CREATE_MENTEE_SUCCESS = 'CREATE_MENTEE_SUCCESS';
 export const CREATE_MENTEE_FAILURE = 'CREATE_MENTEE_FAILURE';
 
+export const DELETE_MENTEE_START = 'DELETE_MENTEE_START';
+export const DELETE_MENTEE_SUCCESS = 'DELETE_MENTEE_SUCCESS';
+export const DELETE_MENTEE_FAILURE = 'DELETE_MENTEE_FAILURE';
+
 export const FETCH_MESSAGES_START = 'FETCH_MESSAGES_START';
 export const FETCH_MESSAGES_SUCCESS = 'FETCH_MESSAGES_SUCCESS';
 export const FETCH_MESSAGES_FAILURE = 'FETCH_MESSAGES_FAILURE';
+
+export const DELETE_MESSAGE_START = 'DELETE_MESSAGE_START';
+export const DELETE_MESSAGE_SUCCESS = 'DELETE_MESSAGE_SUCCESS';
+export const DELETE_MESSAGE_FAILURE = 'DELETE_MESSAGE_FAILURE';
 
 export const FETCH_MENTEES_START = 'FETCH_MENTEES_START';
 export const FETCH_MENTEES_SUCCESS = 'FETCH_MENTEES_SUCCESS';
@@ -81,5 +89,14 @@ export const createMentee = mentee => dispatch => {
   dispatch({type: CREATE_MENTEE_START});
   axios.post(`${baseURL}/mentees`, mentee, setHeaders())
     .then(res => console.log(res))
+    .catch(err => console.log(err));
+}
+
+export const deleteMentee = id => dispatch => {
+  dispatch({type: DELETE_MENTEE_START});
+  axios.delete(`${baseURL}/mentees/${id}`, setHeaders())
+    .then(res => {
+      dispatch({type: DELETE_MENTEE_SUCCESS})
+  })
     .catch(err => console.log(err));
 }
