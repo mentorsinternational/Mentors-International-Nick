@@ -58,7 +58,7 @@ class App extends Component {
         />
         <Route
           exact
-          path="/mentee"
+          path="/mentees"
           render={props =>
             localStorage.getItem("jwt") ? (
               <MenteeView />

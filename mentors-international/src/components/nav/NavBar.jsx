@@ -40,7 +40,7 @@ const NavBar = props => {
       <NavLinks exact to="/reminder">
         Create Reminder
       </NavLinks>
-      <NavLinks exact to="/mentee">
+      <NavLinks exact to="/mentees">
         Add Mentee
       </NavLinks>
       {localStorage.getItem("jwt") && (

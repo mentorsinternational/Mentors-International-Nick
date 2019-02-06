@@ -1,11 +1,13 @@
 import React from "react";
 
+import Mentee from "./Mentee";
+
 const MenteeList = props => {
   return (
     <div>
       <h1>Mentees</h1>
-      {props.schedules.map((schedule, index) => (
-        <h3 key={index}>{schedule.schedule}</h3>
+      {props.mentees.map(mentee => (
+        <Mentee key={mentee.id} mentee={mentee} />
       ))}
     </div>
   );

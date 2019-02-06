@@ -14,9 +14,17 @@ export const CREATE_MESSAGE_START = 'CREATE_MESSAGE_START';
 export const CREATE_MESSAGE_SUCCESS = 'CREATE_MESSAGE_SUCCESS';
 export const CREATE_MESSAGE_FAILURE = 'CREATE_MESSAGE_FAILURE';
 
+export const CREATE_MENTEE_START = 'CREATE_MENTEE_START';
+export const CREATE_MENTEE_SUCCESS = 'CREATE_MENTEE_SUCCESS';
+export const CREATE_MENTEE_FAILURE = 'CREATE_MENTEE_FAILURE';
+
 export const FETCH_MESSAGES_START = 'FETCH_MESSAGES_START';
 export const FETCH_MESSAGES_SUCCESS = 'FETCH_MESSAGES_SUCCESS';
 export const FETCH_MESSAGES_FAILURE = 'FETCH_MESSAGES_FAILURE';
+
+export const FETCH_MENTEES_START = 'FETCH_MENTEES_START';
+export const FETCH_MENTEES_SUCCESS = 'FETCH_MENTEES_SUCCESS';
+export const FETCH_MENTEES_FAILURE = 'FETCH_MENTEES_FAILURE';
 
 const baseURL = 'http://localhost:4600';
 
@@ -47,6 +55,20 @@ export const logIn = user => dispatch => {
     .catch(err => console.log(err));
 }
 
+export const fetchMessages = _ => dispatch => {
+  dispatch({type: FETCH_MESSAGES_START})
+  axios.get(`${baseURL}/messages`, setHeaders())
+    .then(res => dispatch({type: FETCH_MESSAGES_SUCCESS, payload: res.data}))
+    .catch(err => console.log(err));
+}
+
+export const fetchMentees = _ => dispatch => {
+  dispatch({type: FETCH_MENTEES_START})
+  axios.get(`${baseURL}/mentees`, setHeaders())
+    .then(res => dispatch({type: FETCH_MENTEES_SUCCESS, payload: res.data}))
+    .catch(err => console.log(err));
+}
+
 export const createMessage = message => dispatch => {
   dispatch({type: CREATE_MESSAGE_START})
 
@@ -55,16 +77,9 @@ export const createMessage = message => dispatch => {
     .catch(err => console.log(err));
 }
 
-export const fetchMessages = id => dispatch => {
-  dispatch({type: FETCH_MESSAGES_START})
-  axios.get(`${baseURL}/messages`, setHeaders())
-    .then(res => dispatch({type: FETCH_MESSAGES_SUCCESS, payload: res.data}))
+export const createMentee = mentee => dispatch => {
+  dispatch({type: CREATE_MENTEE_START});
+  axios.post(`${baseURL}/mentees`, mentee, setHeaders())
+    .then(res => console.log(res))
     .catch(err => console.log(err));
 }
-
-// export const createMessage = message => {
-//   return{
-//     type: CREATE_MESSAGE,
-//     payload: message
-//   }
-// }

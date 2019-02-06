@@ -134,7 +134,9 @@ class MessageView extends Component {
           removeDate={this.removeDate}
           toggleDateReminder={this.toggleDateReminder}
         />
-        <CreateMessageButton>Create Message</CreateMessageButton>
+        <CreateMessageButton onClick={this.createMessage}>
+          Create Message
+        </CreateMessageButton>
       </ReminderWrapper>
     );
   }
