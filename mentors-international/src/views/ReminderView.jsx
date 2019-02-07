@@ -77,8 +77,8 @@ class ReminderView extends Component {
     this.setState({
       newMessage: {
         ...this.state.newMessage,
-        reminder_dates: [
-          ...this.state.newMessage.reminder_dates,
+        dates: [
+          ...this.state.newMessage.dates,
           {
             date: moment(this.state.startDate).format("LLL"),
             every_week: false
@@ -93,7 +93,7 @@ class ReminderView extends Component {
     this.setState({
       newMessage: {
         ...this.state.newMessage,
-        reminder_dates: this.state.newMessage.reminder_dates.filter(
+        dates: this.state.newMessage.dates.filter(
           (date, index) => index !== otherIndex
         )
       }
@@ -105,29 +105,17 @@ class ReminderView extends Component {
     this.setState({
       newMessage: {
         ...this.state.newMessage,
-        reminder_dates: this.state.newMessage.reminder_dates.map(
-          (date, index) => {
-            if (index === otherIndex) {
-              return {
-                ...date,
-                every_week: !date.every_week
-              };
-            } else {
-              return date;
-            }
+        dates: this.state.newMessage.dates.map((date, index) => {
+          if (index === otherIndex) {
+            return {
+              ...date,
+              every_week: !date.every_week
+            };
+          } else {
+            return date;
           }
-        )
-      },
-      displayDates: this.state.displayDates.map((date, index) => {
-        if (index === otherIndex) {
-          return {
-            ...date,
-            every_week: !date.every_week
-          };
-        } else {
-          return date;
-        }
-      })
+        })
+      }
     });
   };
 
@@ -180,7 +168,7 @@ class ReminderView extends Component {
           startDate={this.state.startDate}
           handleDateChange={this.handleDateChange}
           toggle={this.toggle}
-          reminder_dates={this.state.newMessage.reminder_dates}
+          dates={this.state.newMessage.dates}
           addDate={this.addDate}
           removeDate={this.removeDate}
           toggleDateReminder={this.toggleDateReminder}

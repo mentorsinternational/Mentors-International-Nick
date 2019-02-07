@@ -66,7 +66,7 @@ const ScheduleForm = props => {
         <DateRemind>
           <SectionTitles>Add Reminder Dates</SectionTitles>
           <DateList
-            reminder_dates={props.reminder_dates}
+            dates={props.dates}
             removeDate={props.removeDate}
             toggleDateReminder={props.toggleDateReminder}
           />

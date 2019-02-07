@@ -6,7 +6,7 @@ import Date from "./Date";
 const DateList = props => {
   return (
     <div>
-      {props.reminder_dates.map((date, index) => (
+      {props.dates.map((date, index) => (
         <Date
           date={date}
           key={index}
