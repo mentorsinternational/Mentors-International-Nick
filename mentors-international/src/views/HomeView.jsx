@@ -9,6 +9,7 @@ import {
   deleteMentee,
   deleteMessage
 } from "../store/actions";
+import history from "../history";
 
 import ReminderList from "../components/home/ReminderList";
 import MenteeList from "../components/home/MenteeList";
@@ -28,13 +29,16 @@ class HomeView extends Component {
   deleteMentee = (e, id) => {
     e.preventDefault();
     this.props.deleteMentee(id);
-    this.props.fetchMentees();
   };
 
   deleteMessage = (e, id) => {
     e.preventDefault();
     this.props.deleteMessage(id);
-    this.props.fetchMessages();
+  };
+
+  editMentee = (e, id) => {
+    e.preventDefault();
+    history.push(`/editmentee/${id}`);
   };
 
   render() {
@@ -51,6 +55,7 @@ class HomeView extends Component {
               <MenteeList
                 mentees={this.props.mentees}
                 deleteMentee={this.deleteMentee}
+                editMentee={this.editMentee}
               />
             </>
           ) : (

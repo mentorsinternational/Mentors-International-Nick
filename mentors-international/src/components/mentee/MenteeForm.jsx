@@ -32,7 +32,7 @@ const MenteeFormBtn = styled.button`
 
 const MenteeForm = props => {
   return (
-    <MenteeFormWrapper onSubmit={props.createMentee}>
+    <MenteeFormWrapper>
       <MenteeTitles>Mentee Name</MenteeTitles>
       <MenteeInput
         type="text"
@@ -49,7 +49,15 @@ const MenteeForm = props => {
         value={props.new_mentee.phone_number}
         onChange={props.handleChange}
       />
-      <MenteeFormBtn>Add Mentee</MenteeFormBtn>
+      {props.isUpdating ? (
+        <MenteeFormBtn
+          onClick={e => props.updateMentee(e, props.updateMenteeId)}
+        >
+          Update Mentee
+        </MenteeFormBtn>
+      ) : (
+        <MenteeFormBtn onClick={props.createMentee}>Add Mentee</MenteeFormBtn>
+      )}
     </MenteeFormWrapper>
   );
 };

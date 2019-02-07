@@ -84,7 +84,7 @@ const ScheduleForm = props => {
           </div>
         </DateRemind>
         <DateRemind>
-          <SectionTitles>Mentees to Remind</SectionTitles>
+          {/* <SectionTitles>Mentees to Remind</SectionTitles>
           <MenteeAddedList
             added_mentees={props.added_mentees}
             removeMentee={props.removeMentee}
@@ -94,7 +94,7 @@ const ScheduleForm = props => {
             mentees={props.mentees}
             addMentee={props.addMentee}
             showPopup={props.showPopup}
-          />
+          /> */}
         </DateRemind>
       </FlexWrapper>
     </ScheduleFormWrapper>

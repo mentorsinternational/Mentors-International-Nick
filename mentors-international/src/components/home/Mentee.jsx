@@ -21,6 +21,7 @@ const Mentee = props => {
       <button onClick={e => props.deleteMentee(e, props.mentee.id)}>
         Delete
       </button>
+      <button onClick={e => props.editMentee(e, props.mentee.id)}>Edit</button>
     </MenteeWrapper>
   );
 };

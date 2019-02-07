@@ -35,8 +35,7 @@ class ReminderView extends Component {
     newMessage: {
       message_title: "",
       message_content: "",
-      reminder_dates: [],
-      added_mentees: []
+      dates: []
     },
     startDate: new Date(),
     showPopup: false
@@ -118,7 +117,17 @@ class ReminderView extends Component {
             }
           }
         )
-      }
+      },
+      displayDates: this.state.displayDates.map((date, index) => {
+        if (index === otherIndex) {
+          return {
+            ...date,
+            every_week: !date.every_week
+          };
+        } else {
+          return date;
+        }
+      })
     });
   };
 
@@ -152,6 +161,12 @@ class ReminderView extends Component {
       showPopup: !this.state.showPopup
     });
   };
+
+  convertDate(date) {
+    return `${moment(date).format("m")} ${moment(date).format("H")} ${moment(
+      date
+    ).format("D")} ${moment(date).format("M")} ${moment(date).format("d")}`;
+  }
 
   render() {
     return (

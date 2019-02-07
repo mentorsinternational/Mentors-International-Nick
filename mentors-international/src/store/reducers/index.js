@@ -17,13 +17,15 @@ import {
   DELETE_MENTEE_FAILURE,
   DELETE_MESSAGE_START,
   DELETE_MESSAGE_SUCCESS,
-  DELETE_MESSAGE_FAILURE
+  DELETE_MESSAGE_FAILURE,
+  FETCH_MENTEE_SUCCESS
 } from '../actions'
 
 const initialState = {
   messages: [],
   schedules: [],
   mentees: [],
+  thisMentee: {},
   isSigningUp: false,
   isFetchingMessages: false,
   isFetchingMentees: false,
@@ -91,6 +93,12 @@ const reducer = (state=initialState, action) => {
         isFetchingMentees: false
       }
 
+    case FETCH_MENTEE_SUCCESS:
+      return {
+        ...state,
+        thisMentee: action.payload[0]
+      }
+
     case DELETE_MENTEE_START:
       return {
         ...state,
@@ -100,7 +108,8 @@ const reducer = (state=initialState, action) => {
     case DELETE_MENTEE_SUCCESS:
       return{
         ...state,
-        isDeletingMentee: false
+        isDeletingMentee: false,
+        mentees: state.mentees.filter(mentee => mentee.id !== action.payload)
       }
 
     case DELETE_MESSAGE_START:
@@ -113,7 +122,8 @@ const reducer = (state=initialState, action) => {
     case DELETE_MESSAGE_SUCCESS:
       return {
         ...state,
-        isDeletingMessage: false
+        isDeletingMessage: false,
+        messages: state.messages.filter(message => message.id !== action.payload)
       }
 
     default:

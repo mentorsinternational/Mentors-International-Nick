@@ -20,6 +20,10 @@ export const CREATE_MENTEE_START = 'CREATE_MENTEE_START';
 export const CREATE_MENTEE_SUCCESS = 'CREATE_MENTEE_SUCCESS';
 export const CREATE_MENTEE_FAILURE = 'CREATE_MENTEE_FAILURE';
 
+export const UPDATE_MENTEE_START = 'UPDATE_MENTEE_START';
+export const UPDATE_MENTEE_SUCCESS = 'UPDATE_MENTEE_SUCCESS';
+export const UPDATE_MENTEE_FAILURE = 'UPDATE_MENTEE_FAILURE';
+
 export const DELETE_MENTEE_START = 'DELETE_MENTEE_START';
 export const DELETE_MENTEE_SUCCESS = 'DELETE_MENTEE_SUCCESS';
 export const DELETE_MENTEE_FAILURE = 'DELETE_MENTEE_FAILURE';
@@ -35,6 +39,10 @@ export const DELETE_MESSAGE_FAILURE = 'DELETE_MESSAGE_FAILURE';
 export const FETCH_MENTEES_START = 'FETCH_MENTEES_START';
 export const FETCH_MENTEES_SUCCESS = 'FETCH_MENTEES_SUCCESS';
 export const FETCH_MENTEES_FAILURE = 'FETCH_MENTEES_FAILURE';
+
+export const FETCH_MENTEE_START = 'FETCH_MENTEE_START';
+export const FETCH_MENTEE_SUCCESS = 'FETCH_MENTEE_SUCCESS';
+export const FETCH_MENTEE_FAILURE = 'FETCH_MENTEE_FAILURE';
 
 const baseURL = 'http://localhost:4600';
 
@@ -77,6 +85,13 @@ export const fetchMessages = _ => dispatch => {
     });
 }
 
+export const fetchMentee = id => dispatch => {
+  dispatch({type: FETCH_MENTEE_START});
+  axios.get(`${baseURL}/mentees/${id}`, setHeaders())
+    .then(res => dispatch({type: FETCH_MENTEE_SUCCESS, payload: res.data}))
+    .catch(err => console.log(err))
+}
+
 export const fetchMentees = _ => dispatch => {
   dispatch({type: FETCH_MENTEES_START})
   axios.get(`${baseURL}/mentees`, setHeaders())
@@ -99,16 +114,26 @@ export const createMentee = mentee => dispatch => {
     .catch(err => console.log(err));
 }
 
+export const updateMentee = (id,info) => dispatch => {
+  dispatch({type: UPDATE_MENTEE_START});
+  axios.put(`${baseURL}/mentees/${id}`, info, setHeaders())
+    .then(res => {
+      dispatch({type: UPDATE_MENTEE_SUCCESS, payload: res.data});
+      history.push('/');
+    })
+    .catch(err => console.log(err));
+}
+
 export const deleteMentee = id => dispatch => {
   dispatch({type: DELETE_MENTEE_START});
   axios.delete(`${baseURL}/mentees/${id}`, setHeaders())
-    .then(res => dispatch({type: DELETE_MENTEE_SUCCESS}))
+    .then(res => dispatch({type: DELETE_MENTEE_SUCCESS, payload: id}))
     .catch(err => console.log(err));
 }
 
 export const deleteMessage = id => dispatch => {
   dispatch({type: DELETE_MESSAGE_START});
   axios.delete(`${baseURL}/messages/${id}`, setHeaders())
-    .then(res => dispatch({type: DELETE_MENTEE_SUCCESS, payload: res.data}))
+    .then(res => dispatch({type: DELETE_MESSAGE_SUCCESS, payload: id}))
     .catch(err => console.log(err))
 }

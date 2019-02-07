@@ -40,6 +40,7 @@ const MenteeList = props => {
             mentee={mentee}
             deleteMentee={props.deleteMentee}
             lastMentee={index === props.mentees.length - 1}
+            editMentee={props.editMentee}
           />
         ))}
       </div>

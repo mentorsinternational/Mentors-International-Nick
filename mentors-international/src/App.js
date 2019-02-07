@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Redirect, withRouter } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import styled from "styled-components";
 
 import HomeView from "./views/HomeView";
@@ -68,6 +68,17 @@ class App extends Component {
           render={props =>
             localStorage.getItem("jwt") ? (
               <AccountView {...props} />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
+        />
+        <Route
+          exact
+          path="/editmentee/:mID"
+          render={props =>
+            localStorage.getItem("jwt") ? (
+              <MenteeView {...props} isUpdating={true} />
             ) : (
               <Redirect to="/login" />
             )
