@@ -128,7 +128,8 @@ class ReminderView extends Component {
       newMessage: {
         ...this.state.newMessage,
         added_mentees: [...this.state.newMessage.added_mentees, mentee]
-      }
+      },
+      showPopup: false
     });
   };
 

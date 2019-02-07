@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import history from '../../history';
+
 export const SIGNUP_START = 'SIGNUP_START';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
@@ -57,8 +59,10 @@ export const logIn = user => dispatch => {
   dispatch({type: LOGIN_START});
   axios.post(`${baseURL}/login`, user)
     .then(res => {
-      console.log(res);
-      localStorage.setItem('jwt', res.data.token)
+      console.log(res.data);
+      dispatch({type: LOGIN_SUCCESS, payload: res.data});
+      localStorage.setItem('jwt', res.data.token);
+      history.push('/');
     })
     .catch(err => console.log(err));
 }
@@ -67,7 +71,10 @@ export const fetchMessages = _ => dispatch => {
   dispatch({type: FETCH_MESSAGES_START})
   axios.get(`${baseURL}/messages`, setHeaders())
     .then(res => dispatch({type: FETCH_MESSAGES_SUCCESS, payload: res.data}))
-    .catch(err => console.log(err));
+    .catch(err => {
+      localStorage.removeItem('jwt');
+      console.log(err)
+    });
 }
 
 export const fetchMentees = _ => dispatch => {

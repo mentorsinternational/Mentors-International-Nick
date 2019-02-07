@@ -8,6 +8,7 @@ import ReminderView from "./views/ReminderView";
 import ScheduleView from "./views/ScheduleView";
 import SignupView from "./views/SignupView";
 import MenteeView from './views/MenteeView';
+import AccountView from './views/AccountView';
 import NavBar from "./components/nav/NavBar";
 
 const AppWrapper = styled.div`
@@ -24,13 +25,7 @@ class App extends Component {
         <Route
           exact
           path="/"
-          render={props =>
-            localStorage.getItem("jwt") ? (
-              <HomeView />
-            ) : (
-              <Redirect to="/login" />
-            )
-          }
+          component={HomeView}
         />
         <Route path="/login" component={LoginView} />
         <Route path="/signup" component={SignupView} />
@@ -39,7 +34,7 @@ class App extends Component {
           path="/reminder"
           render={props =>
             localStorage.getItem("jwt") ? (
-              <ReminderViewWithRouter />
+              <ReminderView {...props} />
             ) : (
               <Redirect to="/login" />
             )
@@ -50,7 +45,7 @@ class App extends Component {
           path="/schedule"
           render={props =>
             localStorage.getItem("jwt") ? (
-              <ScheduleView />
+              <ScheduleView {...props} />
             ) : (
               <Redirect to="/login" />
             )
@@ -61,7 +56,18 @@ class App extends Component {
           path="/mentees"
           render={props =>
             localStorage.getItem("jwt") ? (
-              <MenteeViewWithRouter />
+              <MenteeView {...props} />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
+        />
+        <Route
+          exact
+          path="/account"
+          render={props =>
+            localStorage.getItem("jwt") ? (
+              <AccountView {...props} />
             ) : (
               <Redirect to="/login" />
             )
@@ -71,8 +77,5 @@ class App extends Component {
     );
   }
 }
-
-const ReminderViewWithRouter = withRouter(ReminderView);
-const MenteeViewWithRouter = withRouter(MenteeView);
 
 export default App;
