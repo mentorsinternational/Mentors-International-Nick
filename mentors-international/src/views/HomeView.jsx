@@ -41,6 +41,11 @@ class HomeView extends Component {
     history.push(`/editmentee/${id}`);
   };
 
+  editReminder = (e, id) => {
+    e.preventDefault();
+    history.push(`/editreminder/${id}`);
+  };
+
   render() {
     return (
       <>
@@ -51,6 +56,7 @@ class HomeView extends Component {
               <ReminderList
                 messages={this.props.messages}
                 deleteMessage={this.deleteMessage}
+                editReminder={this.editReminder}
               />
               <MenteeList
                 mentees={this.props.mentees}

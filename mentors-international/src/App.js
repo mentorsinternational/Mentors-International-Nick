@@ -5,7 +5,6 @@ import styled from "styled-components";
 import HomeView from "./views/HomeView";
 import LoginView from "./views/LoginView";
 import ReminderView from "./views/ReminderView";
-import ScheduleView from "./views/ScheduleView";
 import SignupView from "./views/SignupView";
 import MenteeView from './views/MenteeView';
 import AccountView from './views/AccountView';
@@ -42,17 +41,6 @@ class App extends Component {
         />
         <Route
           exact
-          path="/schedule"
-          render={props =>
-            localStorage.getItem("jwt") ? (
-              <ScheduleView {...props} />
-            ) : (
-              <Redirect to="/login" />
-            )
-          }
-        />
-        <Route
-          exact
           path="/mentees"
           render={props =>
             localStorage.getItem("jwt") ? (
@@ -79,6 +67,17 @@ class App extends Component {
           render={props =>
             localStorage.getItem("jwt") ? (
               <MenteeView {...props} isUpdating={true} />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
+        />
+        <Route
+          exact
+          path="/editreminder/:mID"
+          render={props =>
+            localStorage.getItem("jwt") ? (
+              <ReminderView {...props} isUpdating={true} />
             ) : (
               <Redirect to="/login" />
             )

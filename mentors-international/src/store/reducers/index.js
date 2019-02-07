@@ -31,6 +31,8 @@ const initialState = {
   isFetchingMentees: false,
   isDeletingMentee: false,
   isDeletingMessage: false,
+  isLoggingIn: false,
+
   error: ''
 }
 
@@ -56,6 +58,24 @@ const reducer = (state=initialState, action) => {
         error: 'Error Signing Up'
       }
 
+    case LOGIN_START:
+      return {
+        ...state,
+        isLoggingIn: true,
+        error: ''
+      }
+
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLoggingIn: false,
+      }
+
+    case LOGIN_FAILURE:
+      return {
+        ...state
+      }
+
     case FETCH_MESSAGES_START: 
       return {
         ...state,
@@ -68,6 +88,11 @@ const reducer = (state=initialState, action) => {
         ...state,
         messages: action.payload,
         isFetchingMessages: false
+      }
+
+    case FETCH_MESSAGES_FAILURE:
+      return {
+        ...state
       }
 
     case CREATE_MESSAGE:
@@ -93,6 +118,11 @@ const reducer = (state=initialState, action) => {
         isFetchingMentees: false
       }
 
+    case FETCH_MENTEES_FAILURE:
+      return {
+        ...state
+      }
+
     case FETCH_MENTEE_SUCCESS:
       return {
         ...state,
@@ -106,10 +136,16 @@ const reducer = (state=initialState, action) => {
       }
 
     case DELETE_MENTEE_SUCCESS:
-      return{
+      return {
         ...state,
         isDeletingMentee: false,
         mentees: state.mentees.filter(mentee => mentee.id !== action.payload)
+      }
+
+    case DELETE_MENTEE_FAILURE:
+      return {
+        ...state,
+        isDeletingMentee: false
       }
 
     case DELETE_MESSAGE_START:
@@ -124,6 +160,12 @@ const reducer = (state=initialState, action) => {
         ...state,
         isDeletingMessage: false,
         messages: state.messages.filter(message => message.id !== action.payload)
+      }
+
+    case DELETE_MESSAGE_FAILURE:
+      return {
+        ...state,
+        isDeletingMessage: false
       }
 
     default:

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
 
-import { createMessage, fetchMentees } from "../store/actions";
+import { createMessage, fetchMentees, updateMessage } from "../store/actions";
 
 import MessageForm from "../components/reminder/ReminderForm";
 import ScheduleForm from "../components/Schedule/ScheduleForm";
@@ -28,6 +28,12 @@ const CreateMessageButton = styled.button`
   font-weight: bold;
   cursor: pointer;
   margin-top: 10px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: #53b8e8;
+  }
 `;
 
 class ReminderView extends Component {
@@ -43,6 +49,21 @@ class ReminderView extends Component {
 
   componentDidMount() {
     this.props.fetchMentees();
+    if (this.props.isUpdating) {
+      const thisMessage = this.props.messages.find(
+        message => String(message.id) === this.props.match.params.mID
+      );
+      console.log(thisMessage);
+      this.setState({
+        newMessage: {
+          ...this.state.newMessage,
+          message_title: thisMessage.message_title,
+          message_content: thisMessage.message_content
+          //dates: [...thisMessage.dates]
+        },
+        thisMessageId: thisMessage.id
+      });
+    }
   }
   handleDateChange = date => {
     this.setState({
@@ -144,17 +165,15 @@ class ReminderView extends Component {
 
   togglePopup = e => {
     e.preventDefault();
-    console.log("click");
     this.setState({
       showPopup: !this.state.showPopup
     });
   };
 
-  convertDate(date) {
-    return `${moment(date).format("m")} ${moment(date).format("H")} ${moment(
-      date
-    ).format("D")} ${moment(date).format("M")} ${moment(date).format("d")}`;
-  }
+  updateMessage = e => {
+    e.preventDefault();
+    this.props.updateMessage(this.state.thisMessageId, this.state.newMessage);
+  };
 
   render() {
     return (
@@ -179,9 +198,15 @@ class ReminderView extends Component {
           showPopup={this.state.showPopup}
           togglePopup={this.togglePopup}
         />
-        <CreateMessageButton onClick={this.createMessage}>
-          Create Message
-        </CreateMessageButton>
+        {this.props.isUpdating ? (
+          <CreateMessageButton onClick={this.updateMessage}>
+            Update Message
+          </CreateMessageButton>
+        ) : (
+          <CreateMessageButton onClick={this.createMessage}>
+            Create Message
+          </CreateMessageButton>
+        )}
       </ReminderWrapper>
     );
   }
@@ -189,11 +214,12 @@ class ReminderView extends Component {
 
 const mapStateToProps = state => {
   return {
-    mentees: state.mentees
+    mentees: state.mentees,
+    messages: state.messages
   };
 };
 
 export default connect(
   mapStateToProps,
-  { createMessage, fetchMentees }
+  { createMessage, fetchMentees, updateMessage }
 )(ReminderView);

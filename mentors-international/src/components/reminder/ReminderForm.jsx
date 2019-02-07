@@ -10,13 +10,17 @@ const MessageFormWrapper = styled.form`
 const MessageInput = styled.input`
   width: 100%;
   font-size: 18px;
-  padding: 5px;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
 `;
 
 const MessageContent = styled.textarea`
   width: 100%;
   font-size: 18px;
   padding: 5px;
+  border: none;
+  border-radius: 4px;
 `;
 
 const InputTitles = styled.h3`
@@ -33,6 +37,7 @@ const MessageForm = props => {
         name="message_title"
         value={props.newMessage.message_title}
         onChange={props.handleChange}
+        placeholder="Reminder Title..."
       />
       <InputTitles>Reminder Message</InputTitles>
       <MessageContent
@@ -41,6 +46,7 @@ const MessageForm = props => {
         rows="10"
         value={props.newMessage.message_content}
         onChange={props.handleChange}
+        placeholder="Reminder Message..."
       />
     </MessageFormWrapper>
   );

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const MenteeWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   border-bottom: ${props => !props.lastMentee && "1px dashed gray"};
 
@@ -14,14 +14,32 @@ const MenteeWrapper = styled.div`
   }
 `;
 
+const DeleteButton = styled.button`
+  background: none;
+  border: none;
+  color: #e74c3c;
+  cursor: pointer;
+`;
+
+const EditButton = styled.button`
+  background: none;
+  border: none;
+  color: #62cdff;
+  cursor: pointer;
+`;
+
 const Mentee = props => {
   return (
     <MenteeWrapper lastMentee={props.lastMentee}>
       <h3>{props.mentee.mentee_name}</h3>
-      <button onClick={e => props.deleteMentee(e, props.mentee.id)}>
-        Delete
-      </button>
-      <button onClick={e => props.editMentee(e, props.mentee.id)}>Edit</button>
+      <div>
+        <DeleteButton onClick={e => props.deleteMentee(e, props.mentee.id)}>
+          Delete
+        </DeleteButton>
+        <EditButton onClick={e => props.editMentee(e, props.mentee.id)}>
+          Edit
+        </EditButton>
+      </div>
     </MenteeWrapper>
   );
 };

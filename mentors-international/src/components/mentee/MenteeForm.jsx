@@ -4,7 +4,9 @@ import styled from "styled-components";
 const MenteeInput = styled.input`
   width: 100%;
   font-size: 18px;
-  padding: 5px;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
 `;
 
 const MenteeTitles = styled.h3`
@@ -26,8 +28,14 @@ const MenteeFormBtn = styled.button`
   background: #62cdff;
   font-weight: bold;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 30px;
   width: 100%;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: #53b8e8;
+  }
 `;
 
 const MenteeForm = props => {

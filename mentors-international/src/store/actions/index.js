@@ -10,7 +10,9 @@ export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
-export const CREATE_MESSAGE = 'CREATE_MESSAGE';
+export const UPDATE_ACCOUNT_START = 'UPDATE_ACCOUNT_START';
+export const UPDATE_ACCOUNT_SUCCESS = 'UPDATE_ACCOUNT_SUCCESS';
+export const UPDATE_ACCOUNT_FAILURE = 'UPDATE_ACCOUNT_FAILURE';
 
 export const CREATE_MESSAGE_START = 'CREATE_MESSAGE_START';
 export const CREATE_MESSAGE_SUCCESS = 'CREATE_MESSAGE_SUCCESS';
@@ -31,6 +33,12 @@ export const DELETE_MENTEE_FAILURE = 'DELETE_MENTEE_FAILURE';
 export const FETCH_MESSAGES_START = 'FETCH_MESSAGES_START';
 export const FETCH_MESSAGES_SUCCESS = 'FETCH_MESSAGES_SUCCESS';
 export const FETCH_MESSAGES_FAILURE = 'FETCH_MESSAGES_FAILURE';
+
+export const CREATE_MESSAGE = 'CREATE_MESSAGE';
+
+export const UPDATE_MESSAGE_START = 'UPDATE_MESSAGE_START';
+export const UPDATE_MESSAGE_SUCCESS = 'UPDATE_MESSAGE_SUCCESS';
+export const UPDATE_MESSAGE_FAILURE = 'UPDATE_MESSAGE_FAILURE';
 
 export const DELETE_MESSAGE_START = 'DELETE_MESSAGE_START';
 export const DELETE_MESSAGE_SUCCESS = 'DELETE_MESSAGE_SUCCESS';
@@ -67,11 +75,20 @@ export const logIn = user => dispatch => {
   dispatch({type: LOGIN_START});
   axios.post(`${baseURL}/login`, user)
     .then(res => {
-      console.log(res.data);
+      console.log(res.data.message.replace( /^\D+/g, ''));
       dispatch({type: LOGIN_SUCCESS, payload: res.data});
       localStorage.setItem('jwt', res.data.token);
+      localStorage.setItem('userID', res.data.message.replace( /^\D+/g, ''))
       history.push('/');
     })
+    .catch(err => console.log(err));
+}
+
+export const updateAccount = (id,userInfo) => dispatch => {
+  console.log(id, userInfo)
+  dispatch({type: UPDATE_ACCOUNT_START})
+  axios.put(`${baseURL}/users/${id}`, userInfo, setHeaders())
+    .then(res => console.log(res))
     .catch(err => console.log(err));
 }
 
@@ -128,6 +145,14 @@ export const deleteMentee = id => dispatch => {
   dispatch({type: DELETE_MENTEE_START});
   axios.delete(`${baseURL}/mentees/${id}`, setHeaders())
     .then(res => dispatch({type: DELETE_MENTEE_SUCCESS, payload: id}))
+    .catch(err => console.log(err));
+}
+
+export const updateMessage = (id,message) => dispatch => {
+  console.log(id)
+  dispatch({type: UPDATE_MESSAGE_START});
+  axios.put(`${baseURL}/messages/${id}`, message, setHeaders())
+    .then(res => console.log(res))
     .catch(err => console.log(err));
 }
 

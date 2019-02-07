@@ -3,8 +3,6 @@ import DatePicker from "react-datepicker";
 import styled from "styled-components";
 
 import DateList from "./DateList";
-import MenteeListPopup from "./MenteeListPopup";
-import MenteeAddedList from "./MenteeAddedList";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -14,16 +12,20 @@ const ScheduleFormWrapper = styled.form`
 `;
 
 const StyledDatePicker = styled(DatePicker)`
-  padding: 5px;
+  padding: 8px;
   font-size: 18px;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 10px;
+  border: none;
 
-  & .react-datepicker__input-container {
-    width: 100%;
+  & .react-datepicker-wrapper {
+    width: 100% !important;
+    & .react-datepicker__input-container {
+      width: 100% !important;
 
-    & input {
-      width: 100%;
+      & input {
+        width: 100% !important;
+      }
     }
   }
 `;
@@ -34,25 +36,34 @@ const FlexWrapper = styled.div`
 `;
 
 const DateRemind = styled.div`
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
   flex-wrap: wrap;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  overflow: hidden;
 
-  &:nth-of-type(1) {
+  /* &:nth-of-type(1) {
     padding-right: 5px;
   }
 
   &:nth-of-type(2) {
     padding-left: 5px;
-  }
+  } */
 `;
 
 const AddDateBtn = styled.button`
   font-size: 18px;
-  padding: 5px;
+  padding: 8px;
   cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+  background: #26de81;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 `;
 
 const SectionTitles = styled.h3`
@@ -83,8 +94,8 @@ const ScheduleForm = props => {
             <AddDateBtn onClick={props.addDate}>Add Date</AddDateBtn>
           </div>
         </DateRemind>
-        <DateRemind>
-          {/* <SectionTitles>Mentees to Remind</SectionTitles>
+        {/* <DateRemind>
+          <SectionTitles>Mentees to Remind</SectionTitles>
           <MenteeAddedList
             added_mentees={props.added_mentees}
             removeMentee={props.removeMentee}
@@ -94,8 +105,8 @@ const ScheduleForm = props => {
             mentees={props.mentees}
             addMentee={props.addMentee}
             showPopup={props.showPopup}
-          /> */}
-        </DateRemind>
+          />
+        </DateRemind> */}
       </FlexWrapper>
     </ScheduleFormWrapper>
   );

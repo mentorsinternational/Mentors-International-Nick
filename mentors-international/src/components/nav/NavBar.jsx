@@ -29,6 +29,7 @@ const LogoutBtn = styled(Link)`
 
 const NavBar = props => {
   const logOut = _ => {
+    localStorage.removeItem("userID");
     localStorage.removeItem("jwt");
   };
 
