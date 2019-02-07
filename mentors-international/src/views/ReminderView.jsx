@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
 
-import { createMessage } from "../store/actions";
+import { createMessage, fetchMentees } from "../store/actions";
 
 import MessageForm from "../components/reminder/ReminderForm";
 import ScheduleForm from "../components/Schedule/ScheduleForm";
@@ -30,16 +30,21 @@ const CreateMessageButton = styled.button`
   margin-top: 10px;
 `;
 
-class MessageView extends Component {
+class ReminderView extends Component {
   state = {
     newMessage: {
       message_title: "",
       message_content: "",
-      reminder_dates: []
+      reminder_dates: [],
+      added_mentees: []
     },
-    startDate: new Date()
+    startDate: new Date(),
+    showPopup: false
   };
 
+  componentDidMount() {
+    this.props.fetchMentees();
+  }
   handleDateChange = date => {
     this.setState({
       startDate: date
@@ -117,6 +122,36 @@ class MessageView extends Component {
     });
   };
 
+  addMentee = (e, mentee) => {
+    e.preventDefault();
+    this.setState({
+      newMessage: {
+        ...this.state.newMessage,
+        added_mentees: [...this.state.newMessage.added_mentees, mentee]
+      }
+    });
+  };
+
+  removeMentee = (e, id) => {
+    e.preventDefault();
+    this.setState({
+      newMessage: {
+        ...this.state.newMessage,
+        added_mentees: this.state.newMessage.added_mentees.filter(
+          mentee => mentee.id !== id
+        )
+      }
+    });
+  };
+
+  togglePopup = e => {
+    e.preventDefault();
+    console.log("click");
+    this.setState({
+      showPopup: !this.state.showPopup
+    });
+  };
+
   render() {
     return (
       <ReminderWrapper>
@@ -133,6 +168,12 @@ class MessageView extends Component {
           addDate={this.addDate}
           removeDate={this.removeDate}
           toggleDateReminder={this.toggleDateReminder}
+          mentees={this.props.mentees}
+          added_mentees={this.state.newMessage.added_mentees}
+          addMentee={this.addMentee}
+          removeMentee={this.removeMentee}
+          showPopup={this.state.showPopup}
+          togglePopup={this.togglePopup}
         />
         <CreateMessageButton onClick={this.createMessage}>
           Create Message
@@ -142,7 +183,13 @@ class MessageView extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    mentees: state.mentees
+  };
+};
+
 export default connect(
-  null,
-  { createMessage }
-)(MessageView);
+  mapStateToProps,
+  { createMessage, fetchMentees }
+)(ReminderView);

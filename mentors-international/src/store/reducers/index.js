@@ -15,7 +15,9 @@ import {
   DELETE_MENTEE_START,
   DELETE_MENTEE_SUCCESS,
   DELETE_MENTEE_FAILURE,
-  deleteMentee
+  DELETE_MESSAGE_START,
+  DELETE_MESSAGE_SUCCESS,
+  DELETE_MESSAGE_FAILURE
 } from '../actions'
 
 const initialState = {
@@ -26,6 +28,7 @@ const initialState = {
   isFetchingMessages: false,
   isFetchingMentees: false,
   isDeletingMentee: false,
+  isDeletingMessage: false,
   error: ''
 }
 
@@ -98,6 +101,19 @@ const reducer = (state=initialState, action) => {
       return{
         ...state,
         isDeletingMentee: false
+      }
+
+    case DELETE_MESSAGE_START:
+      return {
+        ...state,
+        isDeletingMessage: true,
+        error: ''
+      }
+
+    case DELETE_MESSAGE_SUCCESS:
+      return {
+        ...state,
+        isDeletingMessage: false
       }
 
     default:

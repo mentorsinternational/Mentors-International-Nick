@@ -5,6 +5,7 @@ const MenteeWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: ${props => !props.lastMentee && "1px dashed gray"};
 
   & button {
     margin: 0;
@@ -15,7 +16,7 @@ const MenteeWrapper = styled.div`
 
 const Mentee = props => {
   return (
-    <MenteeWrapper>
+    <MenteeWrapper lastMentee={props.lastMentee}>
       <h3>{props.mentee.mentee_name}</h3>
       <button onClick={e => props.deleteMentee(e, props.mentee.id)}>
         Delete

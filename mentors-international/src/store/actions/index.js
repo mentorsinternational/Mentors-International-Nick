@@ -95,8 +95,13 @@ export const createMentee = mentee => dispatch => {
 export const deleteMentee = id => dispatch => {
   dispatch({type: DELETE_MENTEE_START});
   axios.delete(`${baseURL}/mentees/${id}`, setHeaders())
-    .then(res => {
-      dispatch({type: DELETE_MENTEE_SUCCESS})
-  })
+    .then(res => dispatch({type: DELETE_MENTEE_SUCCESS}))
     .catch(err => console.log(err));
+}
+
+export const deleteMessage = id => dispatch => {
+  dispatch({type: DELETE_MESSAGE_START});
+  axios.delete(`${baseURL}/messages/${id}`, setHeaders())
+    .then(res => dispatch({type: DELETE_MENTEE_SUCCESS, payload: res.data}))
+    .catch(err => console.log(err))
 }

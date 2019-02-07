@@ -3,6 +3,8 @@ import DatePicker from "react-datepicker";
 import styled from "styled-components";
 
 import DateList from "./DateList";
+import MenteeListPopup from "./MenteeListPopup";
+import MenteeAddedList from "./MenteeAddedList";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -45,10 +47,6 @@ const DateRemind = styled.div`
   &:nth-of-type(2) {
     padding-left: 5px;
   }
-
-  & h3 {
-    margin: 0 0 20px 0;
-  }
 `;
 
 const AddDateBtn = styled.button`
@@ -57,12 +55,16 @@ const AddDateBtn = styled.button`
   cursor: pointer;
 `;
 
+const SectionTitles = styled.h3`
+  margin: 0 0 20px 0;
+`;
+
 const ScheduleForm = props => {
   return (
     <ScheduleFormWrapper>
       <FlexWrapper>
         <DateRemind>
-          <h3>Add Reminder Dates</h3>
+          <SectionTitles>Add Reminder Dates</SectionTitles>
           <DateList
             reminder_dates={props.reminder_dates}
             removeDate={props.removeDate}
@@ -82,7 +84,17 @@ const ScheduleForm = props => {
           </div>
         </DateRemind>
         <DateRemind>
-          <h3>Mentees to Remind</h3>
+          <SectionTitles>Mentees to Remind</SectionTitles>
+          <MenteeAddedList
+            added_mentees={props.added_mentees}
+            removeMentee={props.removeMentee}
+          />
+          <button onClick={props.togglePopup}>Select Mentee</button>
+          <MenteeListPopup
+            mentees={props.mentees}
+            addMentee={props.addMentee}
+            showPopup={props.showPopup}
+          />
         </DateRemind>
       </FlexWrapper>
     </ScheduleFormWrapper>
@@ -90,7 +102,3 @@ const ScheduleForm = props => {
 };
 
 export default ScheduleForm;
-
-{
-  /*  */
-}

@@ -5,6 +5,7 @@ const MessageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: ${props => !props.lastMessage && "1px dashed gray"};
 
   & button {
     margin: 0;
@@ -15,9 +16,11 @@ const MessageWrapper = styled.div`
 
 const Message = props => {
   return (
-    <MessageWrapper>
+    <MessageWrapper lastMessage={props.lastMessage}>
       <h3>{props.message.message_title}</h3>
-      <button>Delete</button>
+      <button onClick={e => props.deleteMessage(e, props.message.id)}>
+        Delete
+      </button>
     </MessageWrapper>
   );
 };
