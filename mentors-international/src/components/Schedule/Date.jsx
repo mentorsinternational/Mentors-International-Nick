@@ -47,6 +47,18 @@ const ToggleBtn = styled.button`
   }
 `;
 
+const DisToggleBtn = styled.div`
+  /* border: 2px solid #62cdff; */
+  background: none;
+  background: lightgray;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0px 4px;
+`;
+
 const PresentFlexDiv = styled.div`
   display: flex;
   justify-content: center;
@@ -60,9 +72,15 @@ const Date = props => {
       <PresentFlexDiv>
         <RemindDiv>
           <p>Remind me</p>
-          <ToggleBtn onClick={e => props.toggleDateReminder(e, props.index)}>
-            {props.date.every_week ? "Every Week" : "Just Once"}
-          </ToggleBtn>
+          {props.date.canEdit ? (
+            <ToggleBtn onClick={e => props.toggleDateReminder(e, props.index)}>
+              {props.date.every_week ? "Every Week" : "Just Once"}
+            </ToggleBtn>
+          ) : (
+            <DisToggleBtn>
+              {props.date.every_week ? "Every Week" : "Just Once"}
+            </DisToggleBtn>
+          )}
         </RemindDiv>
         <DeleteButton onClick={e => props.removeDate(e, props.index)}>
           Delete

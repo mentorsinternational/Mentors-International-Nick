@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import {
   SIGNUP_START,
   SIGNUP_SUCCESS,
@@ -83,10 +85,24 @@ const reducer = (state=initialState, action) => {
         error: ''
       }
 
-    case FETCH_MESSAGES_SUCCESS: 
+    case FETCH_MESSAGES_SUCCESS:
+      console.log(action.payload)
       return {
         ...state,
-        messages: action.payload,
+        messages: action.payload.map(message => {
+          return {...message, schedule: JSON.parse(message.schedule).map(date => {
+            if(date.length < 2) {
+              const items = date.map(item => item.split(', '));
+              const items2 = items[0][0] = items[0][0].split(' ').filter(item => item !== '*')
+              const newDate = new Date(2019, 4, Number(items2[2]), Number(items2[0]), Number(items2[1]))
+
+
+              //return items2;
+              return [`${moment(newDate).format('dddd')}s at ${moment(newDate).format('hh:mm A')}`, 'true', false, moment(newDate).format('LLL')]
+            }
+            return [moment(date[0]).format('LLL'), date[1], false, moment(date[0]).format('LLL')];
+        })}
+        }),
         isFetchingMessages: false
       }
 

@@ -40,15 +40,15 @@ const UpdateInfoBtn = styled.button`
 const AccountForm = props => {
   return (
     <AccountFormWrapper>
-      <AccountTitles>Username</AccountTitles>
+      <AccountTitles>New Name</AccountTitles>
       <AccountInputs
         type="text"
-        placeholder="Username"
+        placeholder="Name"
         value={props.userInfo.name}
         name="name"
         onChange={props.handleChange}
       />
-      <AccountTitles>Password</AccountTitles>
+      <AccountTitles>New Password</AccountTitles>
       <AccountInputs
         type="text"
         placeholder="Password"

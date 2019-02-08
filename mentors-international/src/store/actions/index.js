@@ -95,7 +95,10 @@ export const updateAccount = (id,userInfo) => dispatch => {
 export const fetchMessages = _ => dispatch => {
   dispatch({type: FETCH_MESSAGES_START})
   axios.get(`${baseURL}/messages`, setHeaders())
-    .then(res => dispatch({type: FETCH_MESSAGES_SUCCESS, payload: res.data}))
+    .then(res => {
+      console.log(res);
+      dispatch({type: FETCH_MESSAGES_SUCCESS, payload: res.data})
+  })
     .catch(err => {
       localStorage.removeItem('jwt');
       console.log(err)
@@ -152,7 +155,10 @@ export const updateMessage = (id,message) => dispatch => {
   console.log(id)
   dispatch({type: UPDATE_MESSAGE_START});
   axios.put(`${baseURL}/messages/${id}`, message, setHeaders())
-    .then(res => console.log(res))
+    .then(res => {
+      history.push('/')
+      console.log(res)
+    })
     .catch(err => console.log(err));
 }
 

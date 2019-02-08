@@ -41,7 +41,9 @@ class ReminderView extends Component {
     newMessage: {
       message_title: "",
       message_content: "",
-      dates: []
+      dates: [],
+      canEdit: true,
+      serverDate: ""
     },
     startDate: new Date(),
     showPopup: false
@@ -58,8 +60,15 @@ class ReminderView extends Component {
         newMessage: {
           ...this.state.newMessage,
           message_title: thisMessage.message_title,
-          message_content: thisMessage.message_content
-          //dates: [...thisMessage.dates]
+          message_content: thisMessage.message_content,
+          dates: thisMessage.schedule.map(dateArr => {
+            return {
+              date: dateArr[0],
+              every_week: dateArr[1] === "true",
+              canEdit: dateArr[2],
+              serverDate: dateArr[3]
+            };
+          })
         },
         thisMessageId: thisMessage.id
       });
@@ -102,7 +111,8 @@ class ReminderView extends Component {
           ...this.state.newMessage.dates,
           {
             date: moment(this.state.startDate).format("LLL"),
-            every_week: false
+            every_week: false,
+            canEdit: true
           }
         ]
       }
@@ -172,7 +182,15 @@ class ReminderView extends Component {
 
   updateMessage = e => {
     e.preventDefault();
-    this.props.updateMessage(this.state.thisMessageId, this.state.newMessage);
+    this.props.updateMessage(this.state.thisMessageId, {
+      ...this.state.newMessage,
+      dates: this.state.newMessage.dates.map(date => {
+        return {
+          date: date.serverDate !== undefined ? date.serverDate : date.date,
+          every_week: date.every_week
+        };
+      })
+    });
   };
 
   render() {
