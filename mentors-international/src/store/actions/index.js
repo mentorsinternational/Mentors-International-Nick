@@ -34,7 +34,7 @@ export const FETCH_MENTEES_START = 'FETCH_MENTEES_START';
 export const FETCH_MENTEES_SUCCESS = 'FETCH_MENTEES_SUCCESS';
 export const FETCH_MENTEES_FAILURE = 'FETCH_MENTEES_FAILURE';
 
-const baseURL = 'http://localhost:4600';
+const baseURL = 'https://mentorsinternational.herokuapp.com';
 
 const setHeaders = _ => {
   return {
