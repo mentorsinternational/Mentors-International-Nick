@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import Loader from "react-loader-spinner";
 
-import { fetchMessages } from "../store/actions";
+import { fetchMessages, fetchMentees, deleteMentee } from "../store/actions";
 
-import MessageList from "../components/home/MessageList";
-import ScheduleList from "../components/home/ScheduleList";
+import ReminderList from "../components/home/ReminderList";
+import MenteeList from "../components/home/MenteeList";
 
 const AddMessageBtn = styled.button`
   background: none;
@@ -21,20 +22,33 @@ const AddMessageBtn = styled.button`
 
 class HomeView extends Component {
   componentDidMount() {
-    this.props.fetchMessages(1);
+    this.props.fetchMessages();
+    this.props.fetchMentees();
   }
+
+  deleteMentee = (e, id) => {
+    e.preventDefault();
+    this.props.deleteMentee(id);
+    this.props.fetchMentees();
+  };
 
   render() {
     return (
       <div>
-        <h1>Home View</h1>
-        <MessageList messages={this.props.messages} />
-        <ScheduleList schedules={this.props.schedules} />
+        {!this.props.isFetchingMessages && !this.props.isFetchingMentees ? (
+          <>
+            <ReminderList messages={this.props.messages} />
+            <MenteeList
+              mentees={this.props.mentees}
+              deleteMentee={this.deleteMentee}
+            />
+          </>
+        ) : (
+          <Loader type="TailSpin" color="#62cdff" height="100" width="100" />
+        )}
         <Link to="/message">
-          <AddMessageBtn>+ Message</AddMessageBtn>
+          <AddMessageBtn>Create Reminder</AddMessageBtn>
         </Link>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Signup</Link>
       </div>
     );
   }
@@ -43,11 +57,14 @@ class HomeView extends Component {
 const mapStateToProps = state => {
   return {
     messages: state.messages,
-    schedules: state.schedules
+    schedules: state.schedules,
+    mentees: state.mentees,
+    isFetchingMessages: state.isFetchingMessages,
+    isFetchingMentees: state.isFetchingMentees
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchMessages }
+  { fetchMessages, fetchMentees, deleteMentee }
 )(HomeView);

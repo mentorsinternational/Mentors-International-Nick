@@ -2,26 +2,28 @@ import React from "react";
 import DatePicker from "react-datepicker";
 import styled from "styled-components";
 
-import ScheduleMessageListPopUp from "./ScheduleMessageListPopUp";
-import ScheduleAddedMessages from "./ScheduleAddedMessages";
+import DateList from "./DateList";
 
 import "react-datepicker/dist/react-datepicker.css";
 
 const ScheduleFormWrapper = styled.form`
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: left;
-`;
-
-const ScheduleTitleInput = styled.input`
   width: 100%;
-  font-size: 18px;
-  padding: 5px;
+  text-align: left;
 `;
 
 const StyledDatePicker = styled(DatePicker)`
   padding: 5px;
   font-size: 18px;
+  width: 100%;
+  margin-top: 30px;
+
+  & .react-datepicker__input-container {
+    width: 100%;
+
+    & input {
+      width: 100%;
+    }
+  }
 `;
 
 const FlexWrapper = styled.div`
@@ -32,65 +34,63 @@ const FlexWrapper = styled.div`
 const DateRemind = styled.div`
   width: 50%;
   display: flex;
-  align-content: center;
   justify-content: flex-start;
-  & h3 {
-    margin: 0;
-    margin-top: 4px;
-    margin-right: 5px;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  &:nth-of-type(1) {
+    padding-right: 5px;
   }
 
   &:nth-of-type(2) {
-    justify-content: flex-end;
+    padding-left: 5px;
+  }
+
+  & h3 {
+    margin: 0 0 20px 0;
   }
 `;
 
-const AddMessageBtn = styled.button`
-  margin-bottom: 10px;
-  padding: 5px 25px;
+const AddDateBtn = styled.button`
   font-size: 18px;
+  padding: 5px;
+  cursor: pointer;
 `;
 
 const ScheduleForm = props => {
   return (
     <ScheduleFormWrapper>
-      <h3>Schedule Title</h3>
-      <ScheduleTitleInput type="text" />
       <FlexWrapper>
         <DateRemind>
-          <h3>Date</h3>
-          <StyledDatePicker
-            selected={props.startDate}
-            onChange={props.handleDateChange}
-            showTimeSelect
-            timeFormat="HH:mm"
-            timeIntervals={15}
-            dateFormat="MMMM d, yyyy h:mm aa"
-            timeCaption="time"
+          <h3>Add Reminder Dates</h3>
+          <DateList
+            reminder_dates={props.reminder_dates}
+            removeDate={props.removeDate}
+            toggleDateReminder={props.toggleDateReminder}
           />
+          <div>
+            <StyledDatePicker
+              selected={props.startDate}
+              onChange={props.handleDateChange}
+              showTimeSelect
+              timeFormat="HH:mm"
+              timeIntervals={15}
+              dateFormat="MMMM d, yyyy h:mm aa"
+              timeCaption="time"
+            />
+            <AddDateBtn onClick={props.addDate}>Add Date</AddDateBtn>
+          </div>
         </DateRemind>
         <DateRemind>
-          <h3>Remind me</h3>
-          <button onClick={props.toggle}>
-            {props.justOnce ? "Just Once" : "Every Week"}
-          </button>
+          <h3>Mentees to Remind</h3>
         </DateRemind>
       </FlexWrapper>
-      <h3>Messages</h3>
-      <ScheduleAddedMessages
-        removeMessage={props.removeMessage}
-        addedMessages={props.addedMessages}
-      />
-      <AddMessageBtn onClick={props.toggleMessageList}>
-        Add Message
-      </AddMessageBtn>
-      <ScheduleMessageListPopUp
-        messages={props.messages}
-        toggleML={props.toggleML}
-        addMessage={props.addMessage}
-      />
     </ScheduleFormWrapper>
   );
 };
 
 export default ScheduleForm;
+
+{
+  /*  */
+}

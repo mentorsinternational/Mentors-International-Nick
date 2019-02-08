@@ -2,10 +2,10 @@ import React from "react";
 
 import Message from "./Message";
 
-const MessageList = props => {
+const ReminderList = props => {
   return (
     <div>
-      <h1>Recent Messages</h1>
+      <h1>Recent Reminders</h1>
       {props.messages.map((message, index) => (
         <Message key={index} message={message} />
       ))}
@@ -13,4 +13,4 @@ const MessageList = props => {
   );
 };
 
-export default MessageList;
+export default ReminderList;
