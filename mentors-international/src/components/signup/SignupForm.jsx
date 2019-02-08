@@ -76,7 +76,7 @@ const SignupForm = props => {
       <SignupTitles>Password</SignupTitles>
       <SignupInputs
         name="password"
-        type="text"
+        type="password"
         placeholder="Password"
         value={props.newUser.password}
         onChange={props.handleChange}

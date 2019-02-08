@@ -66,7 +66,7 @@ const LoginForm = props => {
       <LoginTitles>Password</LoginTitles>
       <LoginInputs
         name="password"
-        type="text"
+        type="password"
         placeholder="Password"
         value={props.loginInfo.password}
         onChange={props.handleChange}
