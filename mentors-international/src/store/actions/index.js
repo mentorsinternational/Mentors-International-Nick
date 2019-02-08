@@ -48,6 +48,11 @@ export const FETCH_MENTEES_START = 'FETCH_MENTEES_START';
 export const FETCH_MENTEES_SUCCESS = 'FETCH_MENTEES_SUCCESS';
 export const FETCH_MENTEES_FAILURE = 'FETCH_MENTEES_FAILURE';
 
+
+export const FETCH_MENTEE_START = 'FETCH_MENTEE_START';
+export const FETCH_MENTEE_SUCCESS = 'FETCH_MENTEE_SUCCESS';
+export const FETCH_MENTEE_FAILURE = 'FETCH_MENTEE_FAILURE';
+
 const baseURL = 'https://mentorsinternational.herokuapp.com';
 
 
