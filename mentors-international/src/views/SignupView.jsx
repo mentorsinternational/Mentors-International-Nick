@@ -31,6 +31,7 @@ class SignupView extends Component {
   render() {
     return (
       <div>
+        <h1>Sign Up</h1>
         <SignupForm
           newUser={this.state.newUser}
           handleChange={this.handleChange}

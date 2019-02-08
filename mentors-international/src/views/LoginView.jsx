@@ -30,7 +30,7 @@ class LoginView extends Component {
   render() {
     return (
       <div>
-        <h1>Login View</h1>
+        <h1>Login</h1>
         <LoginForm
           loginInfo={this.state.loginInfo}
           handleChange={this.handleChange}

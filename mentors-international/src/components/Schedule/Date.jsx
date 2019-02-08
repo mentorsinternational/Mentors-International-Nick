@@ -9,6 +9,7 @@ const DateWrapper = styled.div`
   width: 100%;
   padding: 10px;
   margin-bottom: 5px;
+  border-radius: 4px;
 
   & h4 {
     margin: 0px;
@@ -17,21 +18,74 @@ const DateWrapper = styled.div`
 
 const RemindDiv = styled.div`
   display: flex;
+  margin-right: 20px;
+
   & p {
     margin: 0 5px 3px 0;
   }
 `;
 
+const DeleteButton = styled.button`
+  background: none;
+  border: none;
+  color: #e74c3c;
+  cursor: pointer;
+`;
+
+const ToggleBtn = styled.button`
+  /* border: 2px solid #62cdff; */
+  background: none;
+  background: #62cdff;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+const DisToggleBtn = styled.div`
+  /* border: 2px solid #62cdff; */
+  background: none;
+  background: lightgray;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0px 4px;
+`;
+
+const PresentFlexDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Date = props => {
   return (
     <DateWrapper>
-      <h4 onClick={e => props.removeDate(e, props.index)}>{props.date.date}</h4>
-      <RemindDiv>
-        <p>Remind me</p>
-        <button onClick={e => props.toggleDateReminder(e, props.index)}>
-          {props.date.every_week ? "Every Week" : "Just Once"}
-        </button>
-      </RemindDiv>
+      <h4>{props.date.date}</h4>
+      <PresentFlexDiv>
+        <RemindDiv>
+          <p>Remind me</p>
+          {props.date.canEdit ? (
+            <ToggleBtn onClick={e => props.toggleDateReminder(e, props.index)}>
+              {props.date.every_week ? "Every Week" : "Just Once"}
+            </ToggleBtn>
+          ) : (
+            <DisToggleBtn>
+              {props.date.every_week ? "Every Week" : "Just Once"}
+            </DisToggleBtn>
+          )}
+        </RemindDiv>
+        <DeleteButton onClick={e => props.removeDate(e, props.index)}>
+          Delete
+        </DeleteButton>
+      </PresentFlexDiv>
     </DateWrapper>
   );
 };

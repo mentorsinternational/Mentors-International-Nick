@@ -12,16 +12,20 @@ const ScheduleFormWrapper = styled.form`
 `;
 
 const StyledDatePicker = styled(DatePicker)`
-  padding: 5px;
+  padding: 8px;
   font-size: 18px;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 10px;
+  border: none;
 
-  & .react-datepicker__input-container {
-    width: 100%;
+  & .react-datepicker-wrapper {
+    width: 100% !important;
+    & .react-datepicker__input-container {
+      width: 100% !important;
 
-    & input {
-      width: 100%;
+      & input {
+        width: 100% !important;
+      }
     }
   }
 `;
@@ -32,29 +36,38 @@ const FlexWrapper = styled.div`
 `;
 
 const DateRemind = styled.div`
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
   flex-wrap: wrap;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  overflow: hidden;
 
-  &:nth-of-type(1) {
+  /* &:nth-of-type(1) {
     padding-right: 5px;
   }
 
   &:nth-of-type(2) {
     padding-left: 5px;
-  }
-
-  & h3 {
-    margin: 0 0 20px 0;
-  }
+  } */
 `;
 
 const AddDateBtn = styled.button`
   font-size: 18px;
-  padding: 5px;
+  padding: 8px;
   cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+  background: #26de81;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+`;
+
+const SectionTitles = styled.h3`
+  margin: 0 0 20px 0;
 `;
 
 const ScheduleForm = props => {
@@ -62,9 +75,9 @@ const ScheduleForm = props => {
     <ScheduleFormWrapper>
       <FlexWrapper>
         <DateRemind>
-          <h3>Add Reminder Dates</h3>
+          <SectionTitles>Add Reminder Dates</SectionTitles>
           <DateList
-            reminder_dates={props.reminder_dates}
+            dates={props.dates}
             removeDate={props.removeDate}
             toggleDateReminder={props.toggleDateReminder}
           />
@@ -81,16 +94,22 @@ const ScheduleForm = props => {
             <AddDateBtn onClick={props.addDate}>Add Date</AddDateBtn>
           </div>
         </DateRemind>
-        <DateRemind>
-          <h3>Mentees to Remind</h3>
-        </DateRemind>
+        {/* <DateRemind>
+          <SectionTitles>Mentees to Remind</SectionTitles>
+          <MenteeAddedList
+            added_mentees={props.added_mentees}
+            removeMentee={props.removeMentee}
+          />
+          <button onClick={props.togglePopup}>Select Mentee</button>
+          <MenteeListPopup
+            mentees={props.mentees}
+            addMentee={props.addMentee}
+            showPopup={props.showPopup}
+          />
+        </DateRemind> */}
       </FlexWrapper>
     </ScheduleFormWrapper>
   );
 };
 
 export default ScheduleForm;
-
-{
-  /*  */
-}

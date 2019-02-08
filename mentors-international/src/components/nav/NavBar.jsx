@@ -29,6 +29,7 @@ const LogoutBtn = styled(Link)`
 
 const NavBar = props => {
   const logOut = _ => {
+    localStorage.removeItem("userID");
     localStorage.removeItem("jwt");
   };
 
@@ -43,6 +44,9 @@ const NavBar = props => {
       <NavLinks exact to="/mentees">
         Add Mentee
       </NavLinks>
+      {localStorage.getItem("jwt") && (
+        <NavLinks to="/account">Account</NavLinks>
+      )}
       {localStorage.getItem("jwt") && (
         <LogoutBtn to="/login" onClick={logOut}>
           Log Out

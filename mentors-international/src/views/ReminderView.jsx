@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
 
-import { createMessage } from "../store/actions";
+import { createMessage, fetchMentees, updateMessage } from "../store/actions";
 
 import MessageForm from "../components/reminder/ReminderForm";
 import ScheduleForm from "../components/Schedule/ScheduleForm";
@@ -28,18 +28,52 @@ const CreateMessageButton = styled.button`
   font-weight: bold;
   cursor: pointer;
   margin-top: 10px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: #53b8e8;
+  }
 `;
 
-class MessageView extends Component {
+class ReminderView extends Component {
   state = {
     newMessage: {
       message_title: "",
       message_content: "",
-      reminder_dates: []
+      dates: [],
+      canEdit: true,
+      serverDate: ""
     },
-    startDate: new Date()
+    startDate: new Date(),
+    showPopup: false
   };
 
+  componentDidMount() {
+    this.props.fetchMentees();
+    if (this.props.isUpdating) {
+      const thisMessage = this.props.messages.find(
+        message => String(message.id) === this.props.match.params.mID
+      );
+      console.log(thisMessage);
+      this.setState({
+        newMessage: {
+          ...this.state.newMessage,
+          message_title: thisMessage.message_title,
+          message_content: thisMessage.message_content,
+          dates: thisMessage.schedule.map(dateArr => {
+            return {
+              date: dateArr[0],
+              every_week: dateArr[1] === "true",
+              canEdit: dateArr[2],
+              serverDate: dateArr[3]
+            };
+          })
+        },
+        thisMessageId: thisMessage.id
+      });
+    }
+  }
   handleDateChange = date => {
     this.setState({
       startDate: date
@@ -73,11 +107,12 @@ class MessageView extends Component {
     this.setState({
       newMessage: {
         ...this.state.newMessage,
-        reminder_dates: [
-          ...this.state.newMessage.reminder_dates,
+        dates: [
+          ...this.state.newMessage.dates,
           {
             date: moment(this.state.startDate).format("LLL"),
-            every_week: false
+            every_week: false,
+            canEdit: true
           }
         ]
       }
@@ -89,7 +124,7 @@ class MessageView extends Component {
     this.setState({
       newMessage: {
         ...this.state.newMessage,
-        reminder_dates: this.state.newMessage.reminder_dates.filter(
+        dates: this.state.newMessage.dates.filter(
           (date, index) => index !== otherIndex
         )
       }
@@ -101,19 +136,60 @@ class MessageView extends Component {
     this.setState({
       newMessage: {
         ...this.state.newMessage,
-        reminder_dates: this.state.newMessage.reminder_dates.map(
-          (date, index) => {
-            if (index === otherIndex) {
-              return {
-                ...date,
-                every_week: !date.every_week
-              };
-            } else {
-              return date;
-            }
+        dates: this.state.newMessage.dates.map((date, index) => {
+          if (index === otherIndex) {
+            return {
+              ...date,
+              every_week: !date.every_week
+            };
+          } else {
+            return date;
           }
+        })
+      }
+    });
+  };
+
+  addMentee = (e, mentee) => {
+    e.preventDefault();
+    this.setState({
+      newMessage: {
+        ...this.state.newMessage,
+        added_mentees: [...this.state.newMessage.added_mentees, mentee]
+      },
+      showPopup: false
+    });
+  };
+
+  removeMentee = (e, id) => {
+    e.preventDefault();
+    this.setState({
+      newMessage: {
+        ...this.state.newMessage,
+        added_mentees: this.state.newMessage.added_mentees.filter(
+          mentee => mentee.id !== id
         )
       }
+    });
+  };
+
+  togglePopup = e => {
+    e.preventDefault();
+    this.setState({
+      showPopup: !this.state.showPopup
+    });
+  };
+
+  updateMessage = e => {
+    e.preventDefault();
+    this.props.updateMessage(this.state.thisMessageId, {
+      ...this.state.newMessage,
+      dates: this.state.newMessage.dates.map(date => {
+        return {
+          date: date.serverDate !== undefined ? date.serverDate : date.date,
+          every_week: date.every_week
+        };
+      })
     });
   };
 
@@ -129,20 +205,39 @@ class MessageView extends Component {
           startDate={this.state.startDate}
           handleDateChange={this.handleDateChange}
           toggle={this.toggle}
-          reminder_dates={this.state.newMessage.reminder_dates}
+          dates={this.state.newMessage.dates}
           addDate={this.addDate}
           removeDate={this.removeDate}
           toggleDateReminder={this.toggleDateReminder}
+          mentees={this.props.mentees}
+          added_mentees={this.state.newMessage.added_mentees}
+          addMentee={this.addMentee}
+          removeMentee={this.removeMentee}
+          showPopup={this.state.showPopup}
+          togglePopup={this.togglePopup}
         />
-        <CreateMessageButton onClick={this.createMessage}>
-          Create Message
-        </CreateMessageButton>
+        {this.props.isUpdating ? (
+          <CreateMessageButton onClick={this.updateMessage}>
+            Update Message
+          </CreateMessageButton>
+        ) : (
+          <CreateMessageButton onClick={this.createMessage}>
+            Create Message
+          </CreateMessageButton>
+        )}
       </ReminderWrapper>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    mentees: state.mentees,
+    messages: state.messages
+  };
+};
+
 export default connect(
-  null,
-  { createMessage }
-)(MessageView);
+  mapStateToProps,
+  { createMessage, fetchMentees, updateMessage }
+)(ReminderView);
